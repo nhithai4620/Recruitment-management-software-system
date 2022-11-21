@@ -1,0 +1,48 @@
+@import 'config/color';
+
+@mixin modalForm {
+    label {
+        height: 30px;
+        flex: 20%;
+        display: inline-block;
+        width: 100%;
+        vertical-align: bottom;
+        line-height: 30px;
+        font-size: 1rem;
+
+        span {
+            vertical-align: bottom;
+        }
+    }
+
+    input {
+        height: 30px;
+        border: none;
+        border-bottom: 1px solid rgba(181, 181, 181, 0.466);
+        border-radius: 0px;
+    }
+
+    .form-button {
+        display: flex;
+        justify-content: end;
+        align-items: flex-end;
+        gap: 10px;
+
+        button {
+            max-width: 100px;
+            width: 100%;
+        }
+
+        &__save {
+            background-color: $primary;
+            color: white;
+            border: none;
+        }
+
+        &__cancel {
+            background-color: white;
+            border: 1px solid $primary;
+            color: $primary;
+        }
+    }
+}

@@ -1,0 +1,93 @@
+<mat-stepper linear [orientation]="(stepperOrientation | async)!">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" class="p-2">
+      <ng-template matStepLabel>Review candidate's CV</ng-template>
+
+      <div class="container-fluid">
+        <div class="row p-2">
+          <div class="col-md-6">
+            <button
+              matTooltip="Add or update note"
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a home icon"
+              (click)="openNote(details)"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button
+              class="btn btn-primary float-end pass-btn"
+              mat-button
+              matStepperNext
+            >
+              Check pass
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <pdf-viewer
+        [src]="src"
+        [rotation]="0"
+        [original-size]="false"
+        [show-all]="true"
+        [fit-to-page]="false"
+        [zoom]="1"
+        [zoom-scale]="'page-width'"
+        [stick-to-page]="false"
+        [render-text]="true"
+        [external-link-target]="'blank'"
+        [autoresize]="true"
+        [show-borders]="false"
+        style="width: 100%; height: 100vh"
+      ></pdf-viewer>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Interviews</ng-template>
+      <div class="p-2">
+        <button class="btn btn-primary pass-btn" mat-button matStepperPrevious>
+          Back
+        </button>
+        <button
+          mat-button
+          matStepperNext
+          class="btn btn-primary float-end pass-btn"
+        >
+          Next
+        </button>
+      </div>
+      <app-empty-data [action]="'activity'"></app-empty-data>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Assign jobs</ng-template>
+    <div class="rating">
+      <h4>Candidate evaluation</h4>
+      <ngb-rating
+        [max]="10"
+        [(rate)]="currentRate"
+        [readonly]="false"
+      ></ngb-rating>
+      <p class="w-50">
+        {{ details.firstName + " " + details.lastName }} has completed the
+        evaluation. Congratulations and thank you to the members who
+        participated in this recruitment process. This candidate will be
+        assigned to the job at later dates.
+      </p>
+      <img class="rating-img" src="assets/images/congrats1.webp" alt="" />
+      <button class="btn btn-primary btn-done" (click)="onComplete()">
+        Done
+      </button>
+    </div>
+
+    <div>
+      <button class="btn btn-primary pass-btn" mat-button matStepperPrevious>
+        Back
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>

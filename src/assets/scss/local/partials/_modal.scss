@@ -1,0 +1,49 @@
+@import 'config/color';
+
+.modal-confirm {
+    color: #636363;
+    width: 100%;
+
+    .modal-header {
+        border-bottom: none;
+        position: relative;
+    }
+
+    .modal-content {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .modal-footer {
+        border: none;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 10px 15px 25px;
+    }
+
+    .btn-danger:hover,
+    .modal-confirm .btn-danger:focus {
+        background: $primary;
+    }
+
+    .btn,
+    .modal-confirm .btn:active {
+        color: #fff;
+        border-radius: 4px;
+        background: #60c7c1;
+        text-decoration: none;
+        transition: all 0.4s;
+        line-height: normal;
+        min-width: 120px;
+        border: none;
+        min-height: 40px;
+        border-radius: 3px;
+        margin: 0 5px;
+    }
+
+    .btn-danger {
+        background: $primary;
+    }
+}

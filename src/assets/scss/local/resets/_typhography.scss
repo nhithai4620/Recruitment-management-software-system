@@ -1,0 +1,81 @@
+html {
+  font-family: "Libre Baskerville", serif;
+  font-size: 62.5%;
+}
+
+* {
+  font-family: inherit;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.8rem;
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-size: 3.6rem;
+  line-height: 4.4rem;
+  letter-spacing: 0.02em;
+}
+
+h3 {
+  font-size: 3.2rem;
+  line-height: 4rem;
+  letter-spacing: 0.02em;
+}
+
+h4 {
+  font-size: 2.8rem;
+  line-height: 3.6rem;
+  letter-spacing: 0.02em;
+}
+
+h5 {
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  letter-spacing: 0.02em;
+}
+
+h6 {
+  font-size: 2rem;
+  line-height: 2.8rem;
+  letter-spacing: 0.02em;
+}
+
+@include maxWidth($screen-md) {
+
+  // mobile
+  h1 {
+    font-size: 3.6rem;
+    line-height: 4.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+    line-height: 4rem;
+    letter-spacing: 0.02em;
+  }
+
+  h3 {
+    font-size: 2.8rem;
+    line-height: 3.6rem;
+    letter-spacing: 0.02em;
+  }
+
+  h4 {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+  }
+
+  h5 {
+    font-size: 2rem;
+    line-height: 2.8rem;
+  }
+
+  h6 {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
+}

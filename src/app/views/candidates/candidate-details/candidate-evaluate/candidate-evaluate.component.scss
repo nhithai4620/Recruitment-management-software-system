@@ -1,0 +1,42 @@
+@import 'config/color';
+
+.mat-stepper-horizontal {
+    margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+    margin-top: 16px;
+}
+
+.pass-btn {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    background-color: $primary;
+}
+
+ngb-rating {
+    font-size: 30px;
+    color: rgb(215, 205, 12);
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .btn-done {
+        padding: 10px 30px;
+        margin: 10px;
+        background-color: $primary;
+        font-weight: 500;
+    }
+}
+
+.rating-img {
+    display: block;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}

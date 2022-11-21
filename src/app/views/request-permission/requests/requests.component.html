@@ -1,0 +1,160 @@
+<div class="container-fluid">
+  <div class="row pb-3">
+    <div class="col-md-6">
+      <h1>Request list</h1>
+    </div>
+    <div class="col-md-6">
+      <button class="btn pt-2 assign-btn" (click)="openAssign('')">
+        Assign permission
+      </button>
+    </div>
+  </div>
+  <div *ngIf="requestList.length === 0">
+    <app-empty-data [action]="'request permission'"></app-empty-data>
+  </div>
+  <div *ngIf="requestList.length != 0" class="row">
+    <div class="col-md-12">
+      <div class="table-wrapper p-2">
+        <nav class="navbar">
+          <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-2 w-100">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <button
+                  id="button-addon2"
+                  type="submit"
+                  class="btn btn-link text-warning"
+                >
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+              <input
+                type="search"
+                placeholder="What're you searching for?"
+                aria-describedby="button-addon2"
+                class="form-control border-0 bg-light"
+                [(ngModel)]="searchValue"
+              />
+            </div>
+          </div>
+        </nav>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th (click)="setSort('time')">
+                  Time &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('userName')">
+                  User Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('email')">
+                  Email &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('currentPermission')">
+                  Current Permission &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('requestPermission')">
+                  Request Permission &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('isApproval')">
+                  Status &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('createdAt')">
+                  Created at &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th (click)="setSort('updatedAt')">
+                  Updated at &nbsp;
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                [class]="request?.is_approval ? 'is_approval' : 'not_approval'"
+                *ngFor="
+                  let request of requestList
+                    | filter: searchValue
+                    | orderBy: key:reverse
+                    | paginate: { itemsPerPage: itemsPerPage, currentPage: p }
+                "
+              >
+                <td>
+                  {{ calculateTime(request!.created_at) | convertTime }}
+                  <span *ngIf="calculateTime(request!.created_at) < 60">
+                    <img
+                      class="new-icon"
+                      src="assets/icons/new_icon.png"
+                      alt=""
+                    />
+                  </span>
+                </td>
+                <td>
+                  {{ request?.user?.firstName }} {{ request?.user?.lastName }}
+                </td>
+                <td>{{ request?.user?.email }}</td>
+                <td>
+                  <b>{{ request?.user?.permission?.role }}</b>
+                </td>
+                <td>
+                  <b>{{ request?.right?.role }}</b>
+                </td>
+                <td>
+                  <span
+                    *ngIf="!request?.is_approval"
+                    class="not-accepted"
+                    (click)="openPermission(request?._id, request?.is_approval)"
+                    >Refused</span
+                  >
+                  <span
+                    *ngIf="request?.is_approval"
+                    class="accepted"
+                    (click)="openPermission(request?._id, request?.is_approval)"
+                    >Accepted</span
+                  >
+                </td>
+                <td>
+                  <i>{{ request?.created_at | date }}</i>
+                </td>
+                <td>
+                  <i>{{ request?.updated_at | date }}</i>
+                </td>
+                <td>
+                  <i
+                    (click)="openDelete(request?._id)"
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-pagination">
+          <div class="row d-flex justify-content-between">
+            <div class="col-md-3">
+              <label
+                >Items per page:
+                <select [(ngModel)]="itemsPerPage">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+              </label>
+            </div>
+            <div class="col-md-3 p-3">
+              <pagination-controls
+                (pageChange)="p = $event"
+              ></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

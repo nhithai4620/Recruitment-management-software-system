@@ -1,0 +1,64 @@
+<div class="wrapper-note">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Note</mat-card-title>
+      <button
+        mat-mini-fab
+        color="warn"
+        aria-label="Example icon button with a home icon"
+        (click)="openNote(details)"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <div *ngIf="details?.note?.note != ''">
+      <mat-card-content>
+        <span [innerHTML]="details?.note?.note"> </span>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-footer>
+        <p>
+          <i
+            [class]="details?.note?.shared ? 'fa-unlock' : 'fa-lock'"
+            class="fa"
+            aria-hidden="true"
+          ></i>
+          Created at
+          {{ calculateTime(details?.note?.createdAt) | convertTime }}
+        </p>
+        <div class="note--menu">
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openNote(details)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="openDeleteNote(details)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="switchNoteStatus(details?.note?.shared)"
+            >
+              <mat-icon>share</mat-icon>
+              <span>Disable/Unable</span>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-card-footer>
+    </div>
+    <div *ngIf="details?.note?.note == ''">
+      <mat-card-content class="d-flex justify-content-center">
+        <h5 class="p-2">Add note</h5>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>

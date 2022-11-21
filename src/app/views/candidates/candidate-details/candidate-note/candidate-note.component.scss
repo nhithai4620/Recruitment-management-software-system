@@ -1,0 +1,33 @@
+.wrapper-note {
+    padding: 20px 10%;
+}
+
+mat-card-footer {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        padding: 10px;
+    }
+}
+
+mat-card-content {
+    padding: 20px;
+}
+
+mat-card-header {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        margin-bottom: 10px;
+    }
+}
+
+.fa-unlock {
+    color: rgb(17, 188, 17);
+}
+
+.fa-lock {
+    color: crimson;
+}

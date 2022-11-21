@@ -1,0 +1,399 @@
+<div class="container-fluid">
+  <div class="wrapper">
+    <mat-card class="add-activity">
+      <mat-card-header>
+        <mat-card-title>Create activity</mat-card-title>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="activeModal.dismiss('Cross click')"
+        ></button>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="activityForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-2">
+                <label
+                  class="label"
+                  for="title"
+                  [class]="{
+                    'star-invalid':
+                      f['title'].errors && (f['title'].touched || submitted)
+                  }"
+                  >Title
+                  <span
+                    [class]="{
+                      'star-invalid':
+                        f['title'].errors ||
+                        (f['title'].touched && f['title'].errors)
+                    }"
+                  >
+                    *
+                  </span>
+                  :</label
+                >
+                <input
+                  type="text"
+                  id="title"
+                  class="form-control"
+                  formControlName="title"
+                  [class]="{
+                    'is-invalid':
+                      f['title'].errors && (f['title'].touched || submitted)
+                  }"
+                />
+                <div
+                  *ngIf="f['title'].errors && (f['title'].touched || submitted)"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['title'].errors['required']">
+                    Title is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-2">
+                <mat-button-toggle-group
+                  #toggleGroup="matButtonToggleGroup"
+                  formControlName="type"
+                  [class]="{
+                    'is-invalid':
+                      f['type'].errors && (f['type'].touched || submitted)
+                  }"
+                >
+                  <mat-button-toggle value="call"
+                    ><i class="fa fa-phone"></i> Call</mat-button-toggle
+                  >
+                  <mat-button-toggle value="meeting"
+                    ><i class="fas fa-door-open"></i> Meeting</mat-button-toggle
+                  >
+                  <mat-button-toggle value="task"
+                    ><i class="fa fa-list" aria-hidden="true"></i>
+                    Task</mat-button-toggle
+                  >
+                  <mat-button-toggle value="interview"
+                    ><i class="fas fa-business-time"></i>
+                    Interview</mat-button-toggle
+                  >
+                </mat-button-toggle-group>
+                <div
+                  *ngIf="f['type'].errors && (f['type'].touched || submitted)"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['type'].errors['required']">
+                    Select type of activity is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-2">
+                <label
+                  class="label"
+                  for="timeStart"
+                  [class]="{
+                    'star-invalid':
+                      f['timeStart'].errors &&
+                      (f['timeStart'].touched || submitted)
+                  }"
+                  >Time Start
+                  <span
+                    [class]="{
+                      'star-invalid':
+                        f['timeStart'].errors ||
+                        (f['timeStart'].touched && f['timeStart'].errors)
+                    }"
+                  >
+                    *
+                  </span>
+                  :</label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  mwlFlatpickr
+                  [altInput]="true"
+                  [convertModelValue]="true"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  altFormat="F j, Y H:i"
+                  formControlName="timeStart"
+                  [class]="{
+                    'is-invalid':
+                      f['timeStart'].errors &&
+                      (f['timeStart'].touched || submitted)
+                  }"
+                />
+                <div
+                  *ngIf="
+                    f['timeStart'].errors &&
+                    (f['timeStart'].touched || submitted)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['timeStart'].errors['required']">
+                    Time start is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-2">
+                <label
+                  class="label"
+                  for="timeEnd"
+                  [class]="{
+                    'star-invalid':
+                      f['timeEnd'].errors && (f['timeEnd'].touched || submitted)
+                  }"
+                  >Time End
+                  <span
+                    [class]="{
+                      'star-invalid':
+                        f['timeEnd'].errors ||
+                        (f['timeEnd'].touched && f['timeEnd'].errors)
+                    }"
+                  >
+                    *
+                  </span>
+                  :</label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  mwlFlatpickr
+                  [altInput]="true"
+                  [convertModelValue]="true"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  altFormat="F j, Y H:i"
+                  formControlName="timeEnd"
+                  [class]="{
+                    'is-invalid':
+                      f['timeEnd'].errors && (f['timeEnd'].touched || submitted)
+                  }"
+                />
+                <div
+                  *ngIf="
+                    f['timeEnd'].errors && (f['timeEnd'].touched || submitted)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['timeEnd'].errors['required']">
+                    Time start is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-2">
+                <label class="label" for="templates"
+                  ><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                  Location :</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="location"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-2">
+                <label
+                  class="label"
+                  for="assignees"
+                  [class]="{
+                    'star-invalid':
+                      f['assignees'].errors &&
+                      (f['assignees'].touched || submitted)
+                  }"
+                  ><i class="fa fa-users" aria-hidden="true"></i> Assignees
+                  <span
+                    [class]="{
+                      'star-invalid':
+                        f['assignees'].errors ||
+                        (f['assignees'].touched && f['assignees'].errors)
+                    }"
+                  >
+                    * :
+                  </span></label
+                >
+                <ng-multiselect-dropdown
+                  [placeholder]="'Select job assigned'"
+                  [data]="recruiterList"
+                  [settings]="dropdownSettings"
+                  formControlName="assignees"
+                  [(ngModel)]="selectedItems"
+                  [class]="{
+                    'is-invalid':
+                      f['assignees'].errors &&
+                      (f['assignees'].touched || submitted)
+                  }"
+                >
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="
+                    f['assignees'].errors &&
+                    (f['assignees'].touched || submitted)
+                  "
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f['assignees'].errors['required']">
+                    Assignees is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group mb-3">
+              <label
+                class="label"
+                for="attendees"
+                [class]="{
+                  'star-invalid':
+                    f['attendees'].errors &&
+                    (f['attendees'].touched || submitted)
+                }"
+              >
+                Attendees
+                <span
+                  [class]="{
+                    'star-invalid':
+                      f['attendees'].errors &&
+                      (f['attendees'].touched || submitted)
+                  }"
+                >
+                  * :
+                </span>
+              </label>
+              <select
+                name="attendees"
+                id="attendees"
+                formControlName="attendees"
+                class="form-control"
+                [class]="{
+                  'is-invalid':
+                    f['attendees'].errors &&
+                    (f['attendees'].touched || submitted)
+                }"
+              >
+                <option value="" disabled>Select attendees</option>
+                <option
+                  [value]="candidate._id"
+                  *ngFor="let candidate of candidateList"
+                >
+                  {{ candidate.email }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  f['attendees'].errors && (f['attendees'].touched || submitted)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="f['attendees'].errors['required']">
+                  Candidates is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-2">
+                <label class="label" for="meetingType"
+                  ><i class="fa fa-video-camera" aria-hidden="true"></i> Online
+                  meeting type :</label
+                >
+                <select
+                  name="type"
+                  id="meetingType"
+                  formControlName="meetingType"
+                  class="form-control"
+                  [value]="'Manual URL'"
+                >
+                  <option value="Manual URL">Manual URL</option>
+                  <option value="Google Meeting">Google Meeting</option>
+                  <option value="Zoom">Zoom</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-2">
+                <label class="label" for="link"
+                  ><i class="fa fa-video-camera" aria-hidden="true"></i> Link
+                  :</label
+                >
+                <input
+                  type="text"
+                  id="link"
+                  formControlName="link"
+                  class="form-control"
+                  [value]="'Manual URL'"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-2">
+                <label class="label" for="templates"
+                  ><i class="fa fa-tags" aria-hidden="true"></i> Tag :</label
+                >
+                <input type="text" class="form-control" formControlName="tag" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group mb-2">
+                <label class="label" for="templates"
+                  ><i class="fa fa-comment-o" aria-hidden="true"></i>
+                  Description :</label
+                >
+                <angular-editor
+                  id="content"
+                  [(ngModel)]="htmlContent"
+                  [config]="config"
+                  formControlName="description"
+                ></angular-editor>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="form-button">
+          <button
+            type="submit"
+            class="form-control btn btn-primary rounded submit form-button__save"
+            (click)="onSubmit()"
+          >
+            Send
+          </button>
+          <button
+            type="submit"
+            class="form-control btn rounded submit form-button__cancel"
+            (click)="activeModal.close('Close click')"
+          >
+            Cancel
+          </button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

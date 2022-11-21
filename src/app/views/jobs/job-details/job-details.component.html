@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <div class="job-details">
+    <div class="row pb-4">
+      <div class="col-md-12">
+        <div class="job-details--top">
+          <div class="job-details--top-name">
+            <h3>
+              {{ jobDetail.jobTitle }}
+            </h3>
+            <p *ngIf="jobDetail?.is_active" class="active">Active</p>
+            <p *ngIf="!jobDetail?.is_active" class="disable">Disable</p>
+            <p class="type">
+              {{ jobDetail.jobCategories + "/" + jobDetail.jobType }}
+            </p>
+          </div>
+          <div class="job-details--top-statistic pt-lg-1">
+            <div class="statistic hire">
+              <h5>Hired</h5>
+              <p>0</p>
+            </div>
+            <div class="statistic pipeline">
+              <h5>In pipeline</h5>
+              <p>2</p>
+            </div>
+            <div class="statistic dropped">
+              <h5>Dropped</h5>
+              <p>1</p>
+            </div>
+          </div>
+          <div class="job-details--top-option">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openAssign('')">
+                <mat-icon>assignment</mat-icon>
+                <span>Assign jobs</span>
+              </button>
+              <button mat-menu-item (click)="switchTabs(1)">
+                <mat-icon>edit</mat-icon>
+                <span>Summary</span>
+              </button>
+              <button mat-menu-item (click)="switchTabs(2)">
+                <mat-icon>calendar_today</mat-icon>
+                <span>Activities</span>
+              </button>
+              <button mat-menu-item (click)="switchTabs(3)">
+                <mat-icon>note</mat-icon>
+                <span>Note</span>
+              </button>
+              <button mat-menu-item (click)="switchTabs(4)">
+                <mat-icon>loyalty</mat-icon>
+                <span>Attachment</span>
+              </button>
+              <button mat-menu-item (click)="switchTabs(5)">
+                <mat-icon> bar_chart</mat-icon>
+                <span>Report</span>
+              </button>
+              <button
+                mat-menu-item
+                (click)="switchStatus(jobDetail?._id, jobDetail?.is_active)"
+              >
+                <mat-icon>swap_horiz</mat-icon>
+                <span>Deactivate/Active</span>
+              </button>
+              <button mat-menu-item (click)="openDelete(jobDetail._id)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="job-details--main">
+          <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="start">
+            <mat-tab label="Jobs">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-users" aria-hidden="true"></i
+                ><span> Candidates</span>
+              </ng-template>
+
+              <app-empty-data [action]="'candidates'"></app-empty-data>
+            </mat-tab>
+            <mat-tab label="Summary">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-user" aria-hidden="true"></i
+                ><span>Summary</span>
+              </ng-template>
+              <app-job-summary [details]="jobDetail"></app-job-summary>
+            </mat-tab>
+            <mat-tab label="Activity">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span> Activities </span>
+              </ng-template>
+              <app-empty-data [action]="'activity'"></app-empty-data>
+            </mat-tab>
+            <mat-tab label="Task">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-list" aria-hidden="true"></i><span> Note </span>
+              </ng-template>
+              <app-job-note [details]="jobDetail"></app-job-note>
+            </mat-tab>
+            <mat-tab label="Note">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-clipboard" aria-hidden="true"></i
+                ><span>Attachments</span>
+              </ng-template>
+              <app-job-attachments [details]="jobDetail"></app-job-attachments>
+            </mat-tab>
+            <mat-tab label="Note">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i
+                ><span>Report</span>
+              </ng-template>
+              <app-job-report [details]="jobDetail"></app-job-report>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

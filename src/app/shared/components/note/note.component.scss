@@ -1,0 +1,44 @@
+@import 'config/color';
+
+h4 {
+    font-size: 2rem;
+}
+
+.form-button {
+    padding-bottom: 50px;
+    margin-top: 50px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+
+    button {
+        padding: 10.5px 15px;
+        width: 200px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &__save {
+        background-color: $primary;
+        border: none;
+    }
+
+    &__cancel {
+        background-color: rgb(204, 204, 204);
+        border: 1px solid $primary;
+
+        &:hover {
+            border: 1px solid $primary;
+        }
+    }
+}
+
+.modal-header,
+.modal-body,
+.modal-content {
+    border: none;
+}
+
+.btn-close {
+    margin-right: 30px !important;
+}

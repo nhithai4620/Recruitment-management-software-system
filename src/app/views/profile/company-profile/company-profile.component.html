@@ -1,0 +1,537 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-12">
+        <div class="wrap">
+          <div class="profile-wrap">
+            <div class="d-flex my-2">
+              <div class="w-100">
+                <h2 class="form-name"><strong>Company profile</strong></h2>
+              </div>
+            </div>
+            <form
+              [formGroup]="profileForm"
+              (ngSubmit)="onSubmit()"
+              class="signin-form"
+            >
+              <div class="form-wrap">
+                <div class="row" formGroupName="companyInfo">
+                  <h5>Profile Details</h5>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3 avatar-profile">
+                          <div>
+                            <label class="label" for="fileInput"
+                              >Company logo</label
+                            >
+                          </div>
+                          <br />
+                          <label class="hoverable" for="fileInput">
+                            <img
+                              [src]="
+                                url
+                                  ? url
+                                  : 'https://www.w3schools.com/howto/img_avatar.png'
+                              "
+                            />
+                            <div class="hover-text">Choose file</div>
+                          </label>
+                          <input
+                            id="fileInput"
+                            type="file"
+                            class="form-control"
+                            (change)="onSelectFile($event)"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="name">
+                            Company Name
+                            <span
+                              [class]="{
+                                'star-invalid':
+                                  f1['name'].errors ||
+                                  (f1['name'].touched && f1['name'].errors)
+                              }"
+                            >
+                              *
+                            </span>
+                          </label>
+                          <input
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            formControlName="name"
+                            autocomplete="fsdfsdf"
+                            [class]="{
+                              'is-invalid':
+                                f1['name'].errors &&
+                                (f1['name'].touched || submitted)
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              f1['name'].errors &&
+                              (f1['name'].touched || submitted)
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f1['name'].errors['required']">
+                              Contact name is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="category">
+                            Company Category
+                            <span
+                              [class]="{
+                                'star-invalid':
+                                  f1['category'].errors ||
+                                  (f1['category'].touched &&
+                                    f1['category'].errors)
+                              }"
+                            >
+                              *
+                            </span>
+                          </label>
+                          <select
+                            name="type"
+                            id="category"
+                            formControlName="category"
+                            class="form-control"
+                            [class]="{
+                              'is-invalid':
+                                f1['category'].errors &&
+                                (f1['category'].touched || submitted)
+                            }"
+                          >
+                            <option value="" disabled>
+                              --Select company category--
+                            </option>
+                            <option
+                              *ngFor="
+                                let category of dataService.companyCategory
+                              "
+                            >
+                              {{ category }}
+                            </option>
+                          </select>
+                          <div
+                            *ngIf="
+                              f1['category'].errors &&
+                              (f1['category'].touched || submitted)
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f1['category'].errors['required']">
+                              Company categories is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="type">
+                            Company Type
+                            <span
+                              [class]="{
+                                'star-invalid':
+                                  f1['type'].errors ||
+                                  (f1['type'].touched && f1['type'].errors)
+                              }"
+                            >
+                              *
+                            </span>
+                          </label>
+                          <select
+                            name="type"
+                            id="type"
+                            formControlName="type"
+                            class="form-control"
+                            [class]="{
+                              'is-invalid':
+                                f1['type'].errors &&
+                                (f1['type'].touched || submitted)
+                            }"
+                          >
+                            <option value="" disabled>
+                              --Select company type--
+                            </option>
+                            <option
+                              *ngFor="let type of dataService.companyType"
+                            >
+                              {{ type }}
+                            </option>
+                          </select>
+                          <div
+                            *ngIf="
+                              f1['type'].errors &&
+                              (f1['type'].touched || submitted)
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f1['type'].errors['required']">
+                              Company type is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="timeZone">
+                            Time Zone
+                          </label>
+                          <select
+                            name="timeZone"
+                            id="timeZone"
+                            formControlName="timeZone"
+                            class="form-control"
+                            [class]="{
+                              'is-invalid':
+                                f1['timeZone'].errors &&
+                                (f1['timeZone'].touched || submitted)
+                            }"
+                          >
+                            <option value="" disabled>--Time Zone--</option>
+                            <option
+                              *ngFor="let timezone of dataService.timeZone"
+                            >
+                              {{ timezone }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group mb-3">
+                          <label class="label" for="bio">
+                            Company Profile
+                          </label>
+                          <textarea
+                            type="text"
+                            id="bio"
+                            class="form-control"
+                            formControlName="bio"
+                            autocomplete="fsdfsdf"
+                            rows="7"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4" formGroupName="contactDetails">
+                  <h5>Contact Details</h5>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="contactName">
+                            Contact Name
+                            <span
+                              [class]="{
+                                'star-invalid':
+                                  f2['contactName'].errors ||
+                                  (f2['contactName'].touched &&
+                                    f2['contactName'].errors)
+                              }"
+                            >
+                              *
+                            </span>
+                          </label>
+                          <input
+                            type="text"
+                            id="contactName"
+                            class="form-control"
+                            formControlName="contactName"
+                            autocomplete="fsdfsdf"
+                            [class]="{
+                              'is-invalid':
+                                f2['contactName'].errors &&
+                                (f2['contactName'].touched || submitted)
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              f2['contactName'].errors &&
+                              (f2['contactName'].touched || submitted)
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f2['contactName'].errors['required']">
+                              Contact name is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="email">
+                            Contact Email
+                            <span
+                              [class]="{
+                                'star-invalid':
+                                  f2['email'].errors ||
+                                  (f2['email'].touched && f2['email'].errors)
+                              }"
+                            >
+                              *
+                            </span>
+                          </label>
+                          <input
+                            type="text"
+                            id="email"
+                            class="form-control"
+                            formControlName="email"
+                            autocomplete="fsdfsdf"
+                            [class]="{
+                              'is-invalid':
+                                f2['email'].errors &&
+                                (f2['email'].touched || submitted)
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              f2['email'].errors &&
+                              (f2['email'].touched || submitted)
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="f2['email'].errors['required']">
+                              Email is required
+                            </div>
+                            <div *ngIf="f2['email'].errors['minlength']">
+                              Email must be at least 8 characters
+                            </div>
+                            <div *ngIf="f2['email'].errors['email']">
+                              Email format is invalid
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group mb-3">
+                              <label class="label" for="phone">
+                                Contact Phone
+                                <span
+                                  [class]="{
+                                    'star-invalid':
+                                      f2['phone'].errors ||
+                                      (f2['phone'].touched &&
+                                        f2['phone'].errors)
+                                  }"
+                                >
+                                  *
+                                </span>
+                              </label>
+                              <input
+                                type="text"
+                                id="phone"
+                                class="form-control"
+                                formControlName="phone"
+                                autocomplete="fsdfsdf"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                [class]="{
+                                  'is-invalid':
+                                    f2['phone'].errors &&
+                                    (f2['phone'].touched || submitted)
+                                }"
+                              />
+                              <div
+                                *ngIf="
+                                  f2['phone'].errors &&
+                                  (f2['phone'].touched || submitted)
+                                "
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f2['phone'].errors['required']">
+                                  Phone is required
+                                </div>
+                                <div *ngIf="f2['phone'].errors['pattern']">
+                                  Phone format is invalid
+                                </div>
+                                <div *ngIf="f2['phone'].errors['minlength']">
+                                  Phone format is invalid
+                                </div>
+                                <div *ngIf="f2['phone'].errors['maxlength']">
+                                  Phone format is invalid
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="website"
+                            >Contact Website</label
+                          >
+                          <input
+                            type="text"
+                            id="website"
+                            class="form-control"
+                            formControlName="website"
+                            autocomplete="fsdfsdf"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4" formGroupName="contactDetails">
+                  <h5>Social profile</h5>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="facebook">
+                            Facebook page
+                          </label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i
+                                  class="fa fa-facebook"
+                                  aria-hidden="true"
+                                ></i>
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              id="facebook"
+                              class="form-control"
+                              formControlName="facebook"
+                              placeholder="Facebook"
+                              [class]="{
+                                'is-invalid':
+                                  f2['facebook'].touched &&
+                                  f2['facebook'].errors
+                              }"
+                            />
+                            <div
+                              *ngIf="
+                                f2['facebook'].touched && f2['facebook'].errors
+                              "
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f2['facebook'].errors['pattern']">
+                                Facebook link is invalid
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="linkedIn"
+                            >LinkedIn Page</label
+                          >
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i
+                                  class="fa fa-linkedin"
+                                  aria-hidden="true"
+                                ></i>
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              id="linkedIn"
+                              class="form-control"
+                              formControlName="linkedIn"
+                              placeholder="LinkedIn"
+                              [class]="{
+                                'is-invalid':
+                                  f2['linkedIn'].touched &&
+                                  f2['linkedIn'].errors
+                              }"
+                            />
+                            <div
+                              *ngIf="
+                                f2['linkedIn'].touched && f2['linkedIn'].errors
+                              "
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f2['linkedIn'].errors['pattern']">
+                                LinkedIn link is invalid
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3">
+                          <label class="label" for="twitter"> Twitter </label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              id="twitter"
+                              class="form-control"
+                              formControlName="twitter"
+                              placeholder="Twitter"
+                              [class]="{
+                                'is-invalid':
+                                  f2['twitter'].touched && f2['twitter'].errors
+                              }"
+                            />
+                            <div
+                              *ngIf="
+                                f2['twitter'].touched && f2['twitter'].errors
+                              "
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f2['twitter'].errors['pattern']">
+                                Twitter link is invalid
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-button">
+                  <button
+                    type="submit"
+                    class="form-control btn btn-primary rounded submit form-button__save"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="submit"
+                    class="form-control btn rounded submit form-button__cancel"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

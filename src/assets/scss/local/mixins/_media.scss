@@ -1,0 +1,17 @@
+@mixin maxWidth($viewPort) {
+  @media screen and (max-width: $viewPort) {
+    @content;
+  }
+}
+
+@mixin minWidth($viewPort) {
+  @media screen and (min-width: $viewPort) {
+    @content;
+  }
+}
+
+@mixin minAndMaxWidth($min, $max) {
+  @media screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}

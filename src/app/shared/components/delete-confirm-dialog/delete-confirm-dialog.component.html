@@ -1,0 +1,33 @@
+<div class="modal-dialog modal-confirm">
+  <div class="modal-content">
+    <div class="modal-header flex-column">
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"
+      ></button>
+      <h4 class="modal-title w-100">Are you sure?</h4>
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+    </div>
+    <div class="modal-body">
+      <p>
+        Do you really want to delete these records? This process cannot be
+        undone.
+      </p>
+    </div>
+    <div class="modal-footer justify-content-center">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-dismiss="modal"
+        (click)="activeModal.close('Close click')"
+      >
+        Cancel
+      </button>
+      <button type="button" class="btn btn-danger" (click)="deleteConfirm()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

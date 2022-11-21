@@ -1,0 +1,483 @@
+<div class="container-fluid">
+  <div class="wrapper-summary summary pt-3">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="summary--descriptions">
+              <form [formGroup]="descriptionForm">
+                <mat-card class="example-card">
+                  <mat-card-header>
+                    <mat-card-title>Job Description</mat-card-title>
+                  </mat-card-header>
+                  <mat-divider></mat-divider>
+                  <mat-card-content>
+                    <mat-accordion class="p-1">
+                      <mat-expansion-panel
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                      >
+                        <mat-expansion-panel-header>
+                          <mat-panel-description>
+                            {{ panelOpenState ? "Close" : "Add" }}
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <angular-editor
+                          [(ngModel)]="htmlContent1"
+                          [config]="config"
+                          formControlName="content"
+                        ></angular-editor>
+                        <div class="form-button">
+                          <button
+                            type="submit"
+                            class="form-control btn btn-primary rounded submit form-button__cancel"
+                            (click)="onCancel()"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            class="form-control btn btn-primary rounded submit form-button__save"
+                            (click)="onSaveDescription()"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                    <div
+                      class="summary--descriptions-content"
+                      [innerHTML]="htmlContent1"
+                    ></div>
+                  </mat-card-content>
+                </mat-card>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="summary--descriptions">
+              <form [formGroup]="benefitsForm">
+                <mat-card class="example-card">
+                  <mat-card-header>
+                    <mat-card-title>Benefits</mat-card-title>
+                  </mat-card-header>
+                  <mat-divider></mat-divider>
+                  <mat-card-content>
+                    <mat-accordion class="p-1">
+                      <mat-expansion-panel
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                      >
+                        <mat-expansion-panel-header>
+                          <mat-panel-description>
+                            {{ panelOpenState ? "Close" : "Add" }}
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <angular-editor
+                          [(ngModel)]="htmlContent2"
+                          [config]="config"
+                          formControlName="content"
+                        ></angular-editor>
+                        <div class="form-button">
+                          <button
+                            type="submit"
+                            class="form-control btn btn-primary rounded submit form-button__cancel"
+                            (click)="onCancel()"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            class="form-control btn btn-primary rounded submit form-button__save"
+                            (click)="onSaveBenefits()"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                    <div
+                      class="summary--descriptions-content"
+                      [innerHTML]="htmlContent2"
+                    ></div>
+                  </mat-card-content>
+                </mat-card>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="summary--descriptions">
+              <form [formGroup]="requirementsForm">
+                <mat-card class="example-card">
+                  <mat-card-header>
+                    <mat-card-title>Job Requirements</mat-card-title>
+                  </mat-card-header>
+                  <mat-divider></mat-divider>
+                  <mat-card-content>
+                    <mat-accordion class="p-1">
+                      <mat-expansion-panel
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                      >
+                        <mat-expansion-panel-header>
+                          <mat-panel-description>
+                            {{ panelOpenState ? "Close" : "Add" }}
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <angular-editor
+                          [(ngModel)]="htmlContent3"
+                          [config]="config"
+                          formControlName="content"
+                        ></angular-editor>
+                        <div class="form-button">
+                          <button
+                            type="submit"
+                            class="form-control btn btn-primary rounded submit form-button__cancel"
+                            (click)="onCancel()"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            class="form-control btn btn-primary rounded submit form-button__save"
+                            (click)="onSaveRequirements()"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                    <div
+                      class="summary--descriptions-content"
+                      [innerHTML]="htmlContent3"
+                    ></div>
+                  </mat-card-content>
+                </mat-card>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="summary--details">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Job Details</mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                  <form [formGroup]="detailForm" class="detailsForm">
+                    <div class="form-group mb-2">
+                      <div class="form-group mb-3">
+                        <label
+                          class="label"
+                          for="jobTitle"
+                          [class]="{
+                            'star-invalid':
+                              f3['jobTitle'].errors && f3['jobTitle'].touched
+                          }"
+                        >
+                          Job Title
+                          <span
+                            [class]="{
+                              'star-invalid':
+                                f3['jobTitle'].errors ||
+                                (f3['jobTitle'].touched &&
+                                  f3['jobTitle'].errors)
+                            }"
+                          >
+                            *
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          id="jobTitle"
+                          class="form-control"
+                          formControlName="jobTitle"
+                          autocomplete="fsdfsd"
+                          [class]="{
+                            'is-invalid':
+                              f3['jobTitle'].errors && f3['jobTitle'].touched
+                          }"
+                        />
+                        <div
+                          *ngIf="
+                            f3['jobTitle'].errors && f3['jobTitle'].touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f3['jobTitle'].errors['required']">
+                            Job title is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group mb-2">
+                      <label
+                        class="label"
+                        for="jobType"
+                        [class]="{
+                          'star-invalid':
+                            f3['jobType'].errors && f3['jobType'].touched
+                        }"
+                      >
+                        Type
+                        <span
+                          [class]="{
+                            'star-invalid':
+                              f3['jobType'].errors ||
+                              (f3['jobType'].touched && f3['jobType'].errors)
+                          }"
+                        >
+                          *
+                        </span>
+                      </label>
+                      <select
+                        name="type"
+                        id="jobType"
+                        formControlName="jobType"
+                        class="form-control"
+                        [class]="{
+                          'is-invalid':
+                            f3['jobType'].errors && f3['jobType'].touched
+                        }"
+                      >
+                        <option value="" disabled>Select Job Type</option>
+                        <option *ngFor="let type of dataService.jobType">
+                          {{ type }}
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="f3['jobType'].errors && f3['jobType'].touched"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f3['jobType'].errors['required']">
+                          Job Type is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group mb-2">
+                      <label
+                        class="label"
+                        for="jobCategories"
+                        [class]="{
+                          'star-invalid':
+                            f3['jobCategories'].errors &&
+                            f3['jobCategories'].touched
+                        }"
+                      >
+                        Categories
+                        <span
+                          [class]="{
+                            'star-invalid':
+                              f3['jobCategories'].errors ||
+                              (f3['jobCategories'].touched &&
+                                f3['jobCategories'].errors)
+                          }"
+                        >
+                          *
+                        </span>
+                      </label>
+                      <select
+                        name="type"
+                        id="jobCategories"
+                        formControlName="jobCategories"
+                        class="form-control"
+                        [class]="{
+                          'is-invalid':
+                            f3['jobCategories'].errors &&
+                            f3['jobCategories'].touched
+                        }"
+                      >
+                        <option value="" disabled>Select Job Categories</option>
+                        <option
+                          *ngFor="let categories of dataService.jobCategories"
+                        >
+                          {{ categories }}
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="
+                          f3['jobCategories'].errors &&
+                          f3['jobCategories'].touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f3['jobCategories'].errors['required']">
+                          Job categories is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group mb-2">
+                      <label class="label" for="email">Quantity :</label>
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        formControlName="jobQuantity"
+                        autocomplete="fsdfsd"
+                      />
+                    </div>
+                    <div class="form-group mb-2">
+                      <label for="experience">Experience</label>
+                      <input
+                        type="text"
+                        id="experience"
+                        class="form-control"
+                        formControlName="experience"
+                        autocomplete="fsdfsd"
+                      />
+                    </div>
+                    <div class="form-group mb-2">
+                      <label for="minSalary">Min Salary</label>
+                      <input
+                        type="number"
+                        id="minSalary"
+                        class="form-control"
+                        formControlName="minSalary"
+                        autocomplete="fsdfsd"
+                        [class]="{
+                          'is-invalid':
+                            f3['minSalary'].errors && f3['minSalary'].touched
+                        }"
+                      />
+                      <div
+                        *ngIf="
+                          f3['minSalary'].errors && f3['minSalary'].touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f3['minSalary'].errors['invalidMinValue']">
+                          Min salary must bigger than 0 and smaller than Max
+                          salary
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                      <label for="">Max Salary</label>
+                      <input
+                        type="number"
+                        id="maxSalary"
+                        class="form-control"
+                        formControlName="maxSalary"
+                        autocomplete="fsdfsd"
+                        [class]="{
+                          'is-invalid':
+                            f3['maxSalary'].errors && f3['maxSalary'].touched
+                        }"
+                      />
+                      <div
+                        *ngIf="
+                          f3['maxSalary'].errors && f3['maxSalary'].touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f3['maxSalary'].errors['invalidMaxValue']">
+                          Max salary must bigger than min salary
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-button p-2">
+                      <button
+                        type="submit"
+                        class="form-control btn btn-primary rounded submit form-button__cancel"
+                        (click)="onCancel()"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        class="form-control btn btn-primary rounded submit form-button__save"
+                        (click)="onSaveDetail()"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </form>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="summary--note">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>Note</mat-card-title>
+                  <button
+                    mat-mini-fab
+                    color="warn"
+                    aria-label="Example icon button with a home icon"
+                    (click)="openNote(details)"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <div *ngIf="details?.note?.note != ''">
+                  <mat-card-content>
+                    <span [innerHTML]="details?.note?.note"> </span>
+                  </mat-card-content>
+                  <mat-divider></mat-divider>
+                  <mat-card-footer>
+                    <p>
+                      <i
+                        [class]="
+                          details?.note?.shared ? 'fa fa-unlock' : 'fa fa-lock'
+                        "
+                        aria-hidden="true"
+                      ></i>
+                      Update at
+                      {{
+                        calculateTime(details?.note?.updatedAt) | convertTime
+                      }}
+                    </p>
+                    <div class="note--menu">
+                      <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="menu"
+                        aria-label="Example icon-button with a menu"
+                      >
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openNote(details)">
+                          <mat-icon>edit</mat-icon>
+                          <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="deleteNote()">
+                          <mat-icon>delete</mat-icon>
+                          <span>Delete</span>
+                        </button>
+                        <button
+                          mat-menu-item
+                          (click)="switchNoteStatus(details?.note?.shared)"
+                        >
+                          <mat-icon>share</mat-icon>
+                          <span>Disable/Unable</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                  </mat-card-footer>
+                </div>
+                <div *ngIf="details?.note?.note == ''">
+                  <mat-card-content class="d-flex justify-content-center">
+                    <h5 class="p-2">Add note</h5>
+                  </mat-card-content>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

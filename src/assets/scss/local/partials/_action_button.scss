@@ -1,0 +1,24 @@
+@import 'config/color';
+
+@mixin action-btn {
+    .btn {
+        color: $primary;
+        border-color: $primary;
+
+        &:hover {
+            background-color: $primary;
+            color: white;
+            font-weight: 600;
+        }
+    }
+
+    .table-action {
+        color: $primary;
+
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+        button {
+            padding: 10px 15px;
+        }
+    }
+}

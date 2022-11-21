@@ -1,0 +1,99 @@
+@import 'config/color';
+// @import 'local/partials/modal';
+@import 'local/partials/bottom-btn-dialog';
+
+.modal-body {
+    padding: 10px 30px;
+}
+
+.is-invalid {
+    border-bottom: 1.5px solid crimson
+}
+
+.invalid-feedback {
+    >div {
+        font-weight: 500;
+    }
+}
+
+.star-invalid {
+    color: crimson !important;
+}
+
+
+// input,
+// select {
+//     padding: 10.5px 15px;
+// }
+
+label {
+    font-weight: 500;
+}
+
+// .form-button {
+    //     @include bottom-button;
+    // }
+
+.container-fluid {
+    padding: 0px;
+}
+
+
+mat-card-footer {
+    padding: 10px;
+}
+
+mat-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card-title {
+    margin: 0px;
+}
+
+ngx-mat-datetime-picker {
+    position: relative;
+    z-index: 999;
+}
+
+::ng-deep .mat-button-toggle-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    mat-button-toggle {
+        flex: 25%;
+    }
+
+    .mat-button-toggle-checked {
+        background-color: $primary;
+        color: white;
+        font-weight: 500;
+    }
+}
+
+
+
+
+// ::ng-deep .mat-form-field {
+//     margin: 0px;
+//     padding: 0px;
+
+//     .mat-form-field-label {
+//         color: slategray;
+//         font-size: 1rem;
+//     }
+
+//     .mat-form-field-underline {
+//         display: none;
+//     }
+
+//     .mat-form-field-ripple {
+//         background-color: slategray;
+//     }
+
+//     .mat-form-field-required-marker {
+//         color: slategray;
+//     }
+// }

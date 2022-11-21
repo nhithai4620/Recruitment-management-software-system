@@ -1,0 +1,245 @@
+<div class="container-fluid">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <h1>Permission</h1>
+    </div>
+    <div class="col-md-6">
+      <button class="btn mt-2 assign-btn" (click)="openAssign('')">
+        Assign permission
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="permissions">
+      <div class="permissions--card">
+        <h3>Super Admin</h3>
+        <img src="/assets/images/admin-roles.png" alt="" />
+        <p>
+          Super admin is the most powerfull role in the system. Has access to
+          all feature in the Admin console, and manage every aspect of your
+          organization's account
+        </p>
+        <ul>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Create and
+            assign permissions or requests
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Manage other
+            super and delegated admins such as profile , template, document ...
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Can change
+            password
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Allow to
+            access to all features of system
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Can Read,
+            Create, Update and Delete all features of system
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Change system
+            settings such as fonts or theme ...
+          </li>
+        </ul>
+        <button>Details</button>
+      </div>
+      <div class="permissions--card">
+        <h3>Readonly Admin</h3>
+        <img src="/assets/images/readonly-admin.png" alt="" />
+        <p>
+          You have access to all elements of the system. However, you are not
+          allowed to change anythings including add new, update or delete. This
+          is the right to help you have the most overview of the entire system.
+        </p>
+        <ul>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Create and
+            assign permissions or requests
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Manage your
+            personal profile (not admin profile)
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Can change
+            owner's password
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Allow to
+            access to all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Can Create,
+            Update and Delete all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Change system
+            settings such as fonts or theme ...
+          </li>
+        </ul>
+        <button>Details</button>
+      </div>
+      <div class="permissions--card">
+        <h3>Human Resources</h3>
+        <img src="/assets/images/HR.png" alt="" />
+        <p>
+          A company or organization's HR department is usually responsible for
+          creating, putting into effect and overseeing policies governing
+          workers and the relationship of the organization with its employees.
+          HR can access all right relate to main features and activities of
+          system
+        </p>
+        <ul>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Create and
+            assign permissions or requests
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Manage other
+            super and delegated admins such as profile , template, document ...
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Can change
+            owner's password
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Allow to
+            access to all features and activities of system
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Can Read,
+            Create, Update and Delete all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Change system
+            settings such as fonts or theme ...
+          </li>
+        </ul>
+        <button>Details</button>
+      </div>
+      <div class="permissions--card">
+        <h3>Interviewers</h3>
+        <img src="/assets/images/interviewers.png" alt="" />
+        <p>
+          You are a guest to attend one or more specific activities such as
+          interview, call or video call. Other than that you can't do anything
+          else on the system
+        </p>
+        <ul>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Create and
+            assign permissions or requests
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Manage other
+            super and delegated admins such as profile , template, document ...
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Can change
+            password
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Allow to
+            access to all features of system
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Can access to
+            jobs requisition, and something just related to this user
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Change system
+            settings such as fonts or theme ...
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Join
+            activities
+          </li>
+        </ul>
+        <button>Details</button>
+      </div>
+      <div class="permissions--card">
+        <h3>Guest</h3>
+        <img src="/assets/images/guest.png" alt="" />
+        <p>
+          You are a guest to attend one or more specific activities such as
+          interview, call or video call. Other than that you can't do anything
+          else on the system
+        </p>
+        <ul>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Create and
+            assign permissions or requests
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Manage other
+            super and delegated admins such as profile , template, document ...
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Can change
+            password
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Allow to
+            access to all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Can Read,
+            Create, Update and Delete all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Change system
+            settings such as fonts or theme ...
+          </li>
+          <li>
+            <i class="fa fa-check-square" aria-hidden="true"></i> Join
+            activities
+          </li>
+        </ul>
+        <button>Details</button>
+      </div>
+      <div class="permissions--card">
+        <h3>Default</h3>
+        <img src="/assets/images/default.png" alt="" />
+        <p>
+          This is the default group of permissions when a user has just
+          registered or just created. They don't have any access rights
+        </p>
+        <ul>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Create and
+            assign permissions or requests
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Manage other
+            super and delegated admins such as profile , template, document ...
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Can change
+            password
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Allow to
+            access to all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Can Read,
+            Create, Update and Delete all features of system
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Change system
+            settings such as fonts or theme ...
+          </li>
+          <li>
+            <i class="fa fa-window-close" aria-hidden="true"></i> Join
+            activities
+          </li>
+        </ul>
+        <button>Details</button>
+      </div>
+    </div>
+  </div>
+</div>

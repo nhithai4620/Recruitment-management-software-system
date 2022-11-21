@@ -1,0 +1,173 @@
+@import 'local/partials/bottom-btn-dialog';
+@import 'config/color';
+
+.example-card {
+    margin: 10px 0px;
+    max-width: 800px;
+    border: 1px solid rgba(184, 184, 184, 0.601);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.summary--descriptions-content {
+    font-size: 1.2rem;
+    padding: 20px 0px;
+    line-height: 2rem;
+}
+
+@import 'config/color';
+
+.is-invalid {
+    border-bottom: 1.5px solid crimson !important;
+}
+
+.invalid-feedback {
+    >div {
+        font-weight: 500;
+    }
+}
+
+.star-invalid {
+    color: crimson !important;
+}
+
+.summary {
+    &--note {
+        mat-card-footer {
+            display: flex;
+            justify-content: space-between;
+
+            p {
+                padding: 10px;
+            }
+        }
+
+        mat-card-header {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+mat-card-content,
+mat-card-footer {
+    padding: 10px;
+}
+
+.detailsForm,
+.contactForm {
+    label {
+        height: 40px;
+        flex: 20%;
+        display: inline-block;
+        width: 30%;
+        vertical-align: bottom;
+        line-height: 40px;
+
+        span {
+            vertical-align: bottom;
+        }
+    }
+
+
+
+    input,
+    select {
+        width: 70%;
+        display: inline-block;
+        height: 40px;
+        border: none;
+        border-bottom: 1px solid rgba(181, 181, 181, 0.466);
+        border-radius: 0px;
+    }
+
+    .form-group {
+        label {
+            display: inline-block;
+            width: 20%;
+            block-size: fit-content;
+        }
+
+        input {
+            display: inline-block;
+            width: 80%;
+        }
+
+        .invalid-feedback {
+            margin-left: 20%;
+        }
+    }
+
+}
+
+.form-button {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    gap: 10px;
+    margin: 15px;
+
+    button {
+        max-width: 100px;
+        width: 100%;
+    }
+
+    &__save {
+        background-color: $primary;
+        color: white;
+        border: none;
+    }
+
+    &__cancel {
+        background-color: white;
+        border: 1px solid $primary;
+        color: $primary;
+    }
+}
+
+.fa-unlock {
+    color: rgb(17, 188, 17);
+}
+
+.fa-lock {
+    color: crimson;
+}
+
+.summary {
+    &--note {
+        mat-card-footer {
+            display: flex;
+            justify-content: space-between;
+
+            p {
+                padding: 10px;
+            }
+        }
+
+        mat-card-header {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+.note--menu {
+    button {
+        border: none;
+        background-color: transparent;
+    }
+
+}

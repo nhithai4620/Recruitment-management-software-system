@@ -1,0 +1,40 @@
+<div class="modal-dialog modal-confirm">
+  <div class="modal-content">
+    <div class="modal-header flex-column">
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')"
+      ></button>
+      <h4 class="modal-title">{{ action }} note</h4>
+      <p>Add note of {{ data.firstName }} {{ data.lastName }}</p>
+    </div>
+    <div class="modal-body">
+      <angular-editor
+        [(ngModel)]="htmlContent"
+        [config]="config"
+      ></angular-editor>
+      <br />
+      <mat-slide-toggle [(ngModel)]="sharedChecked"
+        ><b>Share with client</b></mat-slide-toggle
+      >
+      <div class="form-button">
+        <button
+          type="submit"
+          class="form-control btn btn-primary rounded submit form-button__save"
+          (click)="onSubmit()"
+        >
+          {{ action }}
+        </button>
+        <button
+          type="submit"
+          class="form-control btn rounded submit form-button__cancel"
+          (click)="activeModal.close('Close click')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

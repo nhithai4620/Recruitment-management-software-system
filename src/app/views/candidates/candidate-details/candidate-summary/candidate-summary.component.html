@@ -1,0 +1,411 @@
+<div class="container-fluid">
+  <div class="wrapper-summary">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="summary--details">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <mat-card-title>Details</mat-card-title>
+              </mat-card-header>
+              <mat-divider></mat-divider>
+              <mat-card-content>
+                <form [formGroup]="detailForm" class="detailsForm">
+                  <div class="form-group mb-1">
+                    <label class="label" for="email">Email :</label>
+                    <input
+                      type="email"
+                      id="email"
+                      class="form-control"
+                      formControlName="email"
+                      [readonly]="true"
+                    />
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="firstName"
+                      ><span>First Name :</span></label
+                    >
+                    <input
+                      type="text"
+                      id="firstName"
+                      class="form-control"
+                      formControlName="firstName"
+                      [class]="{
+                        'is-invalid':
+                          f['firstName'].errors && f['firstName'].touched
+                      }"
+                    />
+
+                    <div
+                      *ngIf="f['firstName'].errors && f['firstName'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['firstName'].errors['required']">
+                        First name is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="">Last Name</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      class="form-control"
+                      formControlName="lastName"
+                      [class]="{
+                        'is-invalid':
+                          f['lastName'].errors && f['lastName'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f['lastName'].errors && f['lastName'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['lastName'].errors['required']">
+                        Last name is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="phone">Phone</label>
+                    <input
+                      type="email"
+                      id="phone"
+                      class="form-control"
+                      formControlName="phone"
+                      [class]="{
+                        'is-invalid': f['phone'].errors && f['phone'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f['phone'].errors && f['phone'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['phone'].errors['required']">
+                        Phone is required
+                      </div>
+                      <div *ngIf="f['phone'].errors['pattern']">
+                        Phone format is invalid
+                      </div>
+                      <div *ngIf="f['phone'].errors['minlength']">
+                        Phone format is invalid
+                      </div>
+                      <div *ngIf="f['phone'].errors['maxlength']">
+                        Phone format is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-2">
+                    <label class="label" for="dob">Dob</label>
+                    <input
+                      type="date"
+                      id="dob"
+                      class="form-control"
+                      formControlName="dob"
+                    />
+                    <div
+                      *ngIf="f['dob'].errors && f['dob'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['dob'].errors['underage']">
+                        Day of birth format is invalid, must be greater than 12
+                        and less than 100
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-2">
+                    <label class="label" for="GPA">GPA :</label>
+                    <input
+                      type="number"
+                      id="GPA"
+                      class="form-control"
+                      formControlName="GPA"
+                    />
+                  </div>
+                  <div class="form-group mb-2">
+                    <label class="label" for="experience">Experience :</label>
+                    <input
+                      type="number"
+                      id="experience"
+                      class="form-control"
+                      formControlName="experience"
+                    />
+                  </div>
+                  <div class="form-button">
+                    <button
+                      type="submit"
+                      class="form-control btn btn-primary rounded submit form-button__cancel"
+                      (click)="cancelDetails()"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      class="form-control btn btn-primary rounded submit form-button__save"
+                      (click)="saveDetails()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="summary--contact">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <mat-card-title>Contact</mat-card-title>
+              </mat-card-header>
+              <mat-divider></mat-divider>
+              <mat-card-content>
+                <form [formGroup]="contactForm" class="contactForm">
+                  <div class="form-group mb-1">
+                    <label class="label" for="email">
+                      <i class="fa fa-envelope" aria-hidden="true"></i> Email
+                      :</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      class="form-control"
+                      formControlName="email"
+                      [readonly]="true"
+                    />
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="phone"
+                      ><i class="fa fa-phone" aria-hidden="true"></i>
+                      Phone</label
+                    >
+                    <input
+                      type="email"
+                      id="phone"
+                      class="form-control"
+                      formControlName="phone"
+                      [class]="{
+                        'is-invalid': f1['phone'].errors && f1['phone'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f1['phone'].errors && f1['phone'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f1['phone'].errors['required']">
+                        Phone is required
+                      </div>
+                      <div *ngIf="f1['phone'].errors['pattern']">
+                        Phone format is invalid
+                      </div>
+                      <div *ngIf="f1['phone'].errors['minlength']">
+                        Phone format is invalid
+                      </div>
+                      <div *ngIf="f1['phone'].errors['maxlength']">
+                        Phone format is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="location"
+                      ><i class="fa fa-location-arrow" aria-hidden="true"></i>
+                      Location</label
+                    >
+                    <input
+                      type="text"
+                      id="location"
+                      class="form-control"
+                      formControlName="location"
+                    />
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="website"
+                      ><i class="fa fa-globe" aria-hidden="true"></i>
+                      Website</label
+                    >
+                    <input
+                      type="text"
+                      id="website"
+                      class="form-control"
+                      formControlName="website"
+                      [class]="{
+                        'is-invalid':
+                          f1['website'].errors && f1['website'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f1['website'].errors && f1['website'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f1['website'].errors['pattern']">
+                        Website url is invalid
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-1">
+                    <label class="label" for="facebook"
+                      ><i class="fa fa-facebook" aria-hidden="true"></i>
+                      Facebook</label
+                    >
+                    <input
+                      type="text"
+                      id="facebook"
+                      class="form-control"
+                      formControlName="facebook"
+                      [class]="{
+                        'is-invalid':
+                          f1['facebook'].errors && f1['facebook'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f1['facebook'].errors && f1['facebook'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f1['facebook'].errors['pattern']">
+                        Facebook url is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="linkedin"
+                      ><i class="fa fa-linkedin" aria-hidden="true"></i>
+                      LinkedIn</label
+                    >
+                    <input
+                      type="text"
+                      id="linkedin"
+                      class="form-control"
+                      formControlName="linkedin"
+                      [class]="{
+                        'is-invalid':
+                          f1['linkedin'].errors && f1['linkedin'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f1['linkedin'].errors && f1['linkedin'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f1['linkedin'].errors['pattern']">
+                        Linkedin url is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="label" for="twitter"
+                      ><i class="fa fa-twitter" aria-hidden="true"></i>
+                      Twitter</label
+                    >
+                    <input
+                      type="text"
+                      id="twitter"
+                      class="form-control"
+                      formControlName="twitter"
+                      [class]="{
+                        'is-invalid':
+                          f1['twitter'].errors && f1['twitter'].touched
+                      }"
+                    />
+                    <div
+                      *ngIf="f1['twitter'].errors && f1['twitter'].touched"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f1['twitter'].errors['pattern']">
+                        Twitter url is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-button">
+                    <button
+                      type="submit"
+                      class="form-control btn btn-primary rounded submit form-button__cancel"
+                      (click)="cancelContact()"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      class="form-control btn btn-primary rounded submit form-button__save"
+                      (click)="saveContact()"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class="row">
+          <div class="summary--note">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <mat-card-title>Note</mat-card-title>
+                <button
+                  mat-mini-fab
+                  color="warn"
+                  aria-label="Example icon button with a home icon"
+                  (click)="openNote(details)"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+              </mat-card-header>
+              <mat-divider></mat-divider>
+              <div *ngIf="details?.note?.note != ''">
+                <mat-card-content>
+                  <span [innerHTML]="details?.note?.note"> </span>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-footer>
+                  <p>
+                    <i
+                      [class]="
+                        details?.note?.shared ? 'fa fa-unlock' : 'fa fa-lock'
+                      "
+                      aria-hidden="true"
+                    ></i>
+                    Update
+                    {{ calculateTime(details?.note?.updatedAt) | convertTime }}
+                  </p>
+                  <div class="note--menu">
+                    <button
+                      mat-icon-button
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Example icon-button with a menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="openNote(details)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit</span>
+                      </button>
+                      <button mat-menu-item (click)="openDeleteNote(details)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                      </button>
+                      <button
+                        mat-menu-item
+                        (click)="switchNoteStatus(details?.note?.shared)"
+                      >
+                        <mat-icon>share</mat-icon>
+                        <span>Disable/Unable</span>
+                      </button>
+                    </mat-menu>
+                  </div>
+                </mat-card-footer>
+              </div>
+              <div *ngIf="details?.note?.note == ''">
+                <mat-card-content class="d-flex justify-content-center">
+                  <h5 class="p-2">Add note</h5>
+                </mat-card-content>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

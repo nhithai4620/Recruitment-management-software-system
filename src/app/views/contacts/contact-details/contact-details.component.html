@@ -1,0 +1,270 @@
+<div class="contrainer">
+  <div class="contact-tab">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="contact-tab--infor">
+          <h3>Contact information</h3>
+          <p>
+            Contact the hiring manager to get more information and have greate
+            work !
+          </p>
+          <div class="contact-tab--infor-detail grid-container">
+            <div><i class="fa fa-address-book"></i> Name :</div>
+            <div>
+              {{ contactDetail?.name }}
+            </div>
+            <div><i class="fa fa-envelope" aria-hidden="true"></i> Email:</div>
+            <div>{{ contactDetail?.email }}</div>
+            <div><i class="fa fa-phone" aria-hidden="true"></i> Phone:</div>
+            <div>{{ contactDetail?.phone }}</div>
+            <div>
+              <i class="fa fa-location-arrow" aria-hidden="true"></i> Location:
+            </div>
+            <div>{{ contactDetail?.location }}</div>
+          </div>
+          <div class="contact-tab--infor-social">
+            <div>
+              <a [href]="contactDetail?.website">
+                <i class="fa fa-globe" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div>
+              <a [href]="contactDetail?.facebook">
+                <i class="fa fa-facebook" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div>
+              <a [href]="contactDetail?.twitter"
+                ><i class="fa fa-twitter" aria-hidden="true"></i
+              ></a>
+            </div>
+            <div>
+              <a [href]="contactDetail?.linkedin"
+                ><i class="fa fa-linkedin" aria-hidden="true"></i
+              ></a>
+            </div>
+          </div>
+          <button (click)="openAdd(contactDetail)">Update</button>
+          <div
+            class="contact-tab--infor-circle contact-tab--infor-circle__white"
+          ></div>
+          <div
+            class="contact-tab--infor-circle contact-tab--infor-circle__pink"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="contact-tab--send-mail">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="contact-wrapper">
+                <div class="contact-title w-100">
+                  <h3 class="mb-4">Contact {{ people }}</h3>
+                </div>
+                <form
+                  class="contact-form"
+                  [formGroup]="contactForm"
+                  (ngSubmit)="onSubmit()"
+                >
+                  <div class="form-group mb-3">
+                    <label for="templates">Email Templates</label>
+                    <select
+                      name="templates"
+                      id="templates"
+                      formControlName="templates"
+                      class="form-control"
+                    >
+                      <option value="" disabled>--Select tempalte--</option>
+                      <option
+                        *ngFor="let emailTemplates of emailTemplates"
+                        [value]="emailTemplates.content"
+                      >
+                        {{ emailTemplates.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                      class="label"
+                      for="from"
+                      [class]="{
+                        'star-invalid':
+                          f['from'].errors && (f['from'].touched || submitted)
+                      }"
+                    >
+                      Email
+                      <span
+                        [class]="{
+                          'star-invalid':
+                            f['from'].errors ||
+                            (f['from'].touched && f['from'].errors)
+                        }"
+                      >
+                        *
+                      </span>
+                    </label>
+                    <input
+                      autocomplete="fsdfsd"
+                      id="from"
+                      type="text"
+                      class="form-control"
+                      formControlName="from"
+                      [readOnly]="true"
+                      [class]="{
+                        'is-invalid':
+                          f['from'].errors && (f['from'].touched || submitted)
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        f['from'].errors && (f['from'].touched || submitted)
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['from'].errors['required']">
+                        Email is required
+                      </div>
+                      <div *ngIf="f['from'].errors['minlength']">
+                        Email is required
+                      </div>
+                      <div *ngIf="f['from'].errors['email']">
+                        Email format is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                      class="label"
+                      for="to"
+                      [class]="{
+                        'star-invalid':
+                          f['to'].errors && (f['to'].touched || submitted)
+                      }"
+                    >
+                      To
+                      <span
+                        [class]="{
+                          'star-invalid':
+                            f['to'].errors ||
+                            (f['to'].touched && f['to'].errors)
+                        }"
+                      >
+                        *
+                      </span>
+                    </label>
+                    <input
+                      autocomplete="fsdfsd"
+                      id="to"
+                      type="text"
+                      class="form-control"
+                      formControlName="to"
+                      [class]="{
+                        'is-invalid':
+                          f['to'].errors && (f['to'].touched || submitted)
+                      }"
+                    />
+                    <div
+                      *ngIf="f['to'].errors && (f['to'].touched || submitted)"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['to'].errors['required']">
+                        Email is required
+                      </div>
+                      <div *ngIf="f['to'].errors['minlength']">
+                        Email is required
+                      </div>
+                      <div *ngIf="f['to'].errors['email']">
+                        Email format is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                      class="label"
+                      for="to"
+                      [class]="{
+                        'star-invalid':
+                          f['title'].errors && (f['title'].touched || submitted)
+                      }"
+                    >
+                      Title
+                      <span
+                        [class]="{
+                          'star-invalid':
+                            f['title'].errors ||
+                            (f['title'].touched && f['title'].errors)
+                        }"
+                      >
+                        *
+                      </span>
+                    </label>
+                    <input
+                      autocomplete="fsdfsd"
+                      id="title"
+                      type="text"
+                      class="form-control"
+                      formControlName="title"
+                      [class]="{
+                        'is-invalid':
+                          f['title'].errors && (f['title'].touched || submitted)
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        f['title'].errors && (f['title'].touched || submitted)
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f['title'].errors['required']">
+                        Email is required
+                      </div>
+                      <div *ngIf="f['title'].errors['minlength']">
+                        Email is required
+                      </div>
+                      <div *ngIf="f['title'].errors['email']">
+                        Email format is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="content">Content</label>
+                    <angular-editor
+                      id="content"
+                      [(ngModel)]="htmlContent"
+                      [config]="config"
+                      formControlName="content"
+                    ></angular-editor>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="document">Document</label>
+                    <input
+                      id="fileInput"
+                      type="file"
+                      class="form-control"
+                      (change)="onSelectFile($event)"
+                    />
+                  </div>
+
+                  <div class="form-button">
+                    <button
+                      type="submit"
+                      class="form-control btn btn-primary rounded submit form-button__save"
+                    >
+                      Send
+                    </button>
+                    <button
+                      type="submit"
+                      class="form-control btn rounded submit form-button__cancel"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

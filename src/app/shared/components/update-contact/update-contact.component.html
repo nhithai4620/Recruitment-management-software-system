@@ -1,0 +1,293 @@
+<div class="modal-header">
+  <h4 class="modal-title">Update contact</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form
+    [formGroup]="contactForm"
+    class="contactForm"
+    (ngSubmit)="saveContact()"
+  >
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-1">
+          <label
+            class="label"
+            for="firstName"
+            [class]="{
+              'star-invalid': f['firstName'].errors && f['firstName'].touched
+            }"
+          >
+            First Name :
+            <span
+              [class]="{
+                'star-invalid':
+                  f['firstName'].errors ||
+                  (f['firstName'].touched && f['firstName'].errors)
+              }"
+            >
+              *
+            </span>
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            formControlName="firstName"
+            [class]="{
+              'is-invalid': f['firstName'].errors && f['firstName'].touched
+            }"
+          />
+          <div
+            *ngIf="f['firstName'].errors && f['firstName'].touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['firstName'].errors['required']">
+              First name is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-1">
+          <label
+            class="label"
+            for="lastName"
+            [class]="{
+              'star-invalid': f['lastName'].errors && f['lastName'].touched
+            }"
+          >
+            Name :
+            <span
+              [class]="{
+                'star-invalid':
+                  f['lastName'].errors ||
+                  (f['lastName'].touched && f['lastName'].errors)
+              }"
+            >
+              *
+            </span>
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            formControlName="lastName"
+            [class]="{
+              'is-invalid': f['lastName'].errors && f['lastName'].touched
+            }"
+          />
+          <div
+            *ngIf="f['lastName'].errors && f['lastName'].touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['lastName'].errors['required']">
+              First name is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-1">
+          <label
+            for="email"
+            class="label"
+            [class]="{
+              'star-invalid': f['email'].errors && f['email'].touched
+            }"
+            ><i class="fa fa-envelope" aria-hidden="true"></i> Email :
+            <span
+              [class]="{
+                'star-invalid':
+                  f['email'].errors || (f['email'].touched && f['email'].errors)
+              }"
+            >
+              *
+            </span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            formControlName="email"
+            [class]="{
+              'is-invalid': f['email'].errors && f['email'].touched
+            }"
+          />
+          <div
+            *ngIf="f['email'].errors && f['email'].touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['email'].errors['required']">Email is required</div>
+            <div *ngIf="f['email'].errors['email']">
+              Email format is invalid
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-1">
+          <label
+            for="phone"
+            [class]="{
+              'star-invalid': f['phone'].errors && f['phone'].touched
+            }"
+            ><i class="fa fa-phone" aria-hidden="true"></i> Phone :
+            <span
+              [class]="{
+                'star-invalid':
+                  f['phone'].errors || (f['phone'].touched && f['phone'].errors)
+              }"
+            >
+              *
+            </span>
+          </label>
+          <input
+            id="phone"
+            type="text"
+            class="form-control"
+            formControlName="phone"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            [class]="{
+              'is-invalid': f['phone'].errors && f['phone'].touched
+            }"
+          />
+          <div
+            *ngIf="f['phone'].errors && f['phone'].touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="f['phone'].errors['required']">Phone is required</div>
+            <div *ngIf="f['phone'].errors['pattern']">
+              Phone format is invalid
+            </div>
+            <div *ngIf="f['phone'].errors['minlength']">
+              Phone format is invalid
+            </div>
+            <div *ngIf="f['phone'].errors['maxlength']">
+              Phone format is invalid
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-1">
+      <label class="label" for="location"
+        ><i class="fa fa-location-arrow" aria-hidden="true"></i> Location</label
+      >
+      <input
+        type="text"
+        id="location"
+        class="form-control"
+        formControlName="location"
+      />
+    </div>
+    <div class="form-group mb-1">
+      <label class="label" for="website"
+        ><i class="fa fa-globe" aria-hidden="true"></i> Website</label
+      >
+      <input
+        type="text"
+        id="website"
+        class="form-control"
+        formControlName="website"
+        [class]="{
+          'is-invalid': f['website'].errors && f['website'].touched
+        }"
+      />
+      <div
+        *ngIf="f['website'].errors && f['website'].touched"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['website'].errors['pattern']">Website url is invalid</div>
+      </div>
+    </div>
+
+    <div class="form-group mb-1">
+      <label class="label" for="facebook"
+        ><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</label
+      >
+      <input
+        type="text"
+        id="facebook"
+        class="form-control"
+        formControlName="facebook"
+        [class]="{
+          'is-invalid': f['facebook'].errors && f['facebook'].touched
+        }"
+      />
+      <div
+        *ngIf="f['facebook'].errors && f['facebook'].touched"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['facebook'].errors['pattern']">
+          Facebook url is invalid
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-1">
+      <label class="label" for="linkedin"
+        ><i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn</label
+      >
+      <input
+        type="text"
+        id="linkedin"
+        class="form-control"
+        formControlName="linkedin"
+        [class]="{
+          'is-invalid': f['linkedin'].errors && f['linkedin'].touched
+        }"
+      />
+      <div
+        *ngIf="f['linkedin'].errors && f['linkedin'].touched"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['linkedin'].errors['pattern']">
+          Linkedin url is invalid
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-1">
+      <label class="label" for="twitter"
+        ><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</label
+      >
+      <input
+        type="text"
+        id="twitter"
+        class="form-control"
+        formControlName="twitter"
+        [class]="{
+          'is-invalid': f['twitter'].errors && f['twitter'].touched
+        }"
+      />
+      <div
+        *ngIf="f['twitter'].errors && f['twitter'].touched"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['twitter'].errors['pattern']">Twitter url is invalid</div>
+      </div>
+    </div>
+    <div class="form-button">
+      <button
+        type="button"
+        class="form-control btn btn-primary rounded submit form-button__cancel"
+        (click)="activeModal.close('Close click')"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="form-control btn btn-primary rounded submit form-button__save"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

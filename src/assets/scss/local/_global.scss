@@ -1,0 +1,21 @@
+@import "local/mixins";
+
+body {
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 100%
+}
+
+@include maxWidth($tablet-width) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@include maxWidth($mobile-with) {
+  html {
+    font-size: 60%;
+  }
+}

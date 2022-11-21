@@ -1,0 +1,148 @@
+@import "config/color";
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    gap: 20px 10px;
+
+    >div {
+        height: 40px;
+        width: 100%;
+    }
+}
+
+.contact-tab {
+    background-color: rgba(255, 252, 252, 0.683);
+    border-radius: 15px;
+    min-height: 80vh;
+    margin: 20px 5%;
+
+    &--infor {
+        margin: 10px;
+        background-color: rgb(80, 106, 179);
+        height: 80vh;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+        padding: 30px 10%;
+
+        button {
+            background-color: white;
+            color: $primary;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        h3,
+        p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        &-detail {
+            padding-top: 50px;
+
+            >div {
+                color: white;
+                font-size: 1rem;
+            }
+        }
+
+        &-social {
+            margin: 20px 0px;
+            display: flex;
+            gap: 20px;
+            transition: 0.5s;
+
+            i {
+                color: white;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                padding: 5px;
+
+                &:hover {
+                    border-radius: 50%;
+                    background-color: white;
+                    color: $primary;
+                    font-weight: 500;
+                }
+            }
+
+
+        }
+    }
+
+    &--infor-circle {
+        position: absolute;
+        border-radius: 50%;
+        overflow: hidden;
+
+        &__white {
+            bottom: 160px;
+            right: 100px;
+            background-color: white;
+            width: 100px;
+            height: 100px;
+        }
+
+        &__pink {
+            bottom: -125px;
+            right: -125px;
+            background-color: rgba(254, 207, 215, 0.754);
+            width: 350px;
+            height: 350px;
+
+        }
+    }
+}
+
+@import 'config/color';
+
+.star-invalid {
+    color: crimson !important;
+}
+
+.form-button {
+    padding-bottom: 50px;
+    margin-top: 50px;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+
+    button {
+        padding: 10.5px 15px;
+        width: 200px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &__save {
+        background-color: $primary;
+        border: none;
+    }
+
+    &__cancel {
+        background-color: rgb(204, 204, 204);
+        border: 1px solid $primary;
+
+        &:hover {
+            border: 1px solid $primary;
+        }
+    }
+}
+
+.contact-wrapper {
+    padding: 30px;
+}
+
+.form-group {
+    label {
+        padding-bottom: 5px;
+    }
+}

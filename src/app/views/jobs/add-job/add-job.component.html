@@ -1,0 +1,293 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ action }} job requisition</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form
+    [formGroup]="requisitionForm"
+    (ngSubmit)="onSubmit()"
+    class="profile-form"
+  >
+    <div class="form-wrapper">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="jobTitle"
+              [class]="{
+                'star-invalid': f['jobTitle'].errors && f['jobTitle'].touched
+              }"
+            >
+              Job Title
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['jobTitle'].errors ||
+                    (f['jobTitle'].touched && f['jobTitle'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <input
+              type="text"
+              id="jobTitle"
+              class="form-control"
+              formControlName="jobTitle"
+              autocomplete="fsdfsd"
+              [class]="{
+                'is-invalid':
+                  f['jobTitle'].errors && (f['jobTitle'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="
+                f['jobTitle'].errors && (f['jobTitle'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['jobTitle'].errors['required']">
+                Job title is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="jobType"
+              [class]="{
+                'star-invalid': f['jobType'].errors && f['jobType'].touched
+              }"
+            >
+              Job Type
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['jobType'].errors ||
+                    (f['jobType'].touched && f['jobType'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <select
+              name="type"
+              id="jobType"
+              formControlName="jobType"
+              class="form-control"
+              [class]="{
+                'is-invalid':
+                  f['jobType'].errors && (f['jobType'].touched || submitted)
+              }"
+            >
+              <option value="" disabled>Select Job Type</option>
+              <option *ngFor="let type of dataService.jobType">
+                {{ type }}
+              </option>
+            </select>
+            <div
+              *ngIf="f['jobType'].errors && (f['jobType'].touched || submitted)"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['jobType'].errors['required']">
+                Job Type is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="jobCategories"
+              [class]="{
+                'star-invalid':
+                  f['jobCategories'].errors && f['jobCategories'].touched
+              }"
+            >
+              Job Categories
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['jobCategories'].errors ||
+                    (f['jobCategories'].touched && f['jobCategories'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <select
+              name="type"
+              id="jobCategories"
+              formControlName="jobCategories"
+              class="form-control"
+              [class]="{
+                'is-invalid':
+                  f['jobCategories'].errors &&
+                  (f['jobCategories'].touched || submitted)
+              }"
+            >
+              <option value="" disabled>Select Job Categories</option>
+              <option *ngFor="let categories of dataService.jobCategories">
+                {{ categories }}
+              </option>
+            </select>
+            <div
+              *ngIf="
+                f['jobCategories'].errors &&
+                (f['jobCategories'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['jobCategories'].errors['required']">
+                Job categories is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="jobQuantity">Quantity</label>
+            <input
+              type="number"
+              id="jobQuantity"
+              class="form-control"
+              formControlName="jobQuantity"
+              autocomplete="fsdfsd"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="">Description</label>
+            <angular-editor
+              [config]="config"
+              formControlName="jobDescriptions"
+            ></angular-editor>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="">Requirements</label>
+            <angular-editor
+              [config]="config"
+              formControlName="jobRequirements"
+            ></angular-editor>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="benefits">Benefits</label>
+            <input
+              type="text"
+              id="benefits"
+              class="form-control"
+              formControlName="benefits"
+              autocomplete="fsdfsd"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="experience">Experience</label>
+            <input
+              type="text"
+              id="experience"
+              class="form-control"
+              formControlName="experience"
+              autocomplete="fsdfsd"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="minSalary">Min Salary</label>
+            <input
+              type="number"
+              id="minSalary"
+              class="form-control"
+              formControlName="minSalary"
+              autocomplete="fsdfsd"
+              [class]="{
+                'is-invalid':
+                  f['minSalary'].errors && (f['minSalary'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="
+                f['minSalary'].errors && (f['minSalary'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['minSalary'].errors['invalidMinValue']">
+                Min salary must bigger than 0 and smaller than Max salary
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="">Max Salary</label>
+            <input
+              type="number"
+              id="maxSalary"
+              class="form-control"
+              formControlName="maxSalary"
+              autocomplete="fsdfsd"
+              [class]="{
+                'is-invalid':
+                  f['maxSalary'].errors && (f['maxSalary'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="
+                f['maxSalary'].errors && (f['maxSalary'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['maxSalary'].errors['invalidMaxValue']">
+                Max salary must bigger than min salary
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="form-button">
+    <button
+      type="submit"
+      class="form-control btn btn-primary rounded submit form-button__save"
+      (click)="onSubmit()"
+    >
+      Save
+    </button>
+    <button
+      type="submit"
+      class="form-control btn rounded submit form-button__cancel"
+      (click)="activeModal.close('Close click')"
+    >
+      Cancel
+    </button>
+  </div>
+</div>

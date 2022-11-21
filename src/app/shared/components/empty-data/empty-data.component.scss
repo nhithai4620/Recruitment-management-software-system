@@ -1,0 +1,58 @@
+@import 'config/color';
+
+.wrapper-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.empty-content {
+    display: block;
+    margin: 0 auto;
+
+    &--img {
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 150px;
+        }
+    }
+
+    &--text {
+
+        h5,
+        p,
+        button {
+            text-align: center;
+        }
+
+        h5 {
+            padding: 24px 0px 8px;
+            font-weight: 500;
+        }
+
+        p {
+            padding: 10px;
+        }
+
+        &__link {
+            color: rgb(93, 164, 227);
+            font-weight: 500;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            background-color: $primary;
+            color: white;
+            border: none;
+        }
+
+        i {
+            margin-right: 10px;
+        }
+    }
+}

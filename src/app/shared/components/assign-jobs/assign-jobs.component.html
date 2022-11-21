@@ -1,0 +1,125 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ action }} jobs to recruiters</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="assignForm" (ngSubmit)="onSubmit()">
+    <div class="form-wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="recruiter"
+              [class]="{
+                'star-invalid': f['recruiter'].errors && f['recruiter'].touched
+              }"
+              >Recruiters
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['recruiter'].errors ||
+                    (f['recruiter'].touched && f['recruiter'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <select
+              id="recruiter"
+              class="form-control"
+              formControlName="recruiter"
+              [class]="{
+                'is-invalid':
+                  f['recruiter'].errors && (f['recruiter'].touched || submitted)
+              }"
+            >
+              <option value="" disabled>Select a recruiter</option>
+              <option
+                *ngFor="let recruiter of recruiterList"
+                [value]="recruiter._id"
+              >
+                {{ recruiter.firstName }} {{ recruiter.lastName }} ({{
+                  recruiter.email
+                }})
+              </option>
+            </select>
+            <div
+              *ngIf="
+                f['recruiter'].errors && (f['recruiter'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['recruiter'].errors['required']">
+                Select rectuiter is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="jobTitle"
+              [class]="{
+                'star-invalid': f['recruiter'].errors && f['recruiter'].touched
+              }"
+              >Job title
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['recruiter'].errors ||
+                    (f['recruiter'].touched && f['recruiter'].errors)
+                }"
+              >
+                *
+              </span></label
+            >
+            <ng-multiselect-dropdown
+              [placeholder]="'Select job assigned'"
+              [settings]="dropdownSettings"
+              [data]="jobList"
+              formControlName="jobs"
+              [(ngModel)]="selectedItems"
+              [class]="{
+                'is-invalid':
+                  f['jobs'].errors && (f['jobs'].touched || submitted)
+              }"
+            >
+            </ng-multiselect-dropdown>
+            <div
+              *ngIf="f['jobs'].errors && (f['jobs'].touched || submitted)"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['jobs'].errors['required']">
+                Select jobs is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-button">
+      <button
+        type="submit"
+        class="form-control btn btn-primary rounded submit form-button__save"
+      >
+        Add
+      </button>
+      <button
+        type="submit"
+        class="form-control btn rounded submit form-button__cancel"
+        (click)="activeModal.close('Close click')"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

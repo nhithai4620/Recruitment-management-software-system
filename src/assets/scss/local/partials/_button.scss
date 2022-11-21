@@ -1,0 +1,14 @@
+@import 'config/color';
+
+@mixin button {
+    background-color: $primary;
+    color: white;
+    font-weight: 500;
+
+    &:hover {
+        color: $primary;
+        outline: 2px solid $primary;
+        transition: 0.5s;
+        background-color: white;
+    }
+}

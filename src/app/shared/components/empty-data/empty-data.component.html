@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="wrapper-empty">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="empty-content">
+          <div *ngIf="action == 'Jobs'" class="empty-content--img">
+            <img src="assets/images/empty.svg" alt="figure" />
+          </div>
+          <div *ngIf="action == 'activity'" class="empty-content--img">
+            <img src="assets/images/activity.svg" alt="figure" />
+          </div>
+          <div *ngIf="action == 'candidates'" class="empty-content--img">
+            <img src="assets/images/candidates.png" alt="figure" />
+          </div>
+          <div *ngIf="action == 'contacts'" class="empty-content--img">
+            <img src="assets/images/contacts.png" alt="figure" />
+          </div>
+          <div class="empty-content--text">
+            <h5>You have not created any {{ action }} yet</h5>
+            <p>
+              Creating {{ action }} will allow you to structure your account by
+              creating jobs, contacts and guests under each of those
+              {{ action }}.
+            </p>
+            <p class="empty-content--text__link">Learn more about policy</p>
+            <button class="btn btn-danger" (click)="openAdd()">
+              <i class="fa fa-plus" aria-hidden="true"></i> Create {{ action }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="container-fluid">
+  <div class="candidate-detail">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="candidate-detail--top">
+          <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12">
+              <div class="candidate-detail--top-avatar avatar-profile">
+                <label class="hoverable" for="fileInput">
+                  <img
+                    [src]="
+                      url
+                        ? url
+                        : 'https://www.w3schools.com/howto/img_avatar.png'
+                    "
+                  />
+                  <div class="hover-text">Choose file</div>
+                  <i class="fa fa-camera-retro" aria-hidden="true"></i>
+                </label>
+                <input
+                  id="fileInput"
+                  type="file"
+                  class="form-control"
+                  (change)="onSelectFile($event)"
+                />
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+              <div class="candidate-detail--top-name">
+                <h3>
+                  {{
+                    candidateDetail?.firstName + " " + candidateDetail?.lastName
+                  }}
+                </h3>
+
+                <p *ngIf="candidateDetail?.is_active" class="active">Active</p>
+                <p *ngIf="!candidateDetail?.is_active" class="disable">
+                  Disable
+                </p>
+
+                <p class="label label__email">{{ candidateDetail?.email }}</p>
+                <ngb-rating
+                  [(rate)]="candidateDetail.rating"
+                  (hover)="hovered = $event"
+                  (leave)="hovered = 0"
+                  [readonly]="readonly"
+                ></ngb-rating>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="candidate-detail--top-option p-md-3">
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="menu"
+                  aria-label="Example icon-button with a menu"
+                >
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="switchTabs(0)">
+                    <mat-icon>work</mat-icon>
+                    <span>Evaluate</span>
+                  </button>
+                  <button mat-menu-item (click)="switchTabs(1)">
+                    <mat-icon>edit</mat-icon>
+                    <span>Summary</span>
+                  </button>
+                  <button mat-menu-item (click)="switchTabs(2)">
+                    <mat-icon>perm_phone_msg</mat-icon>
+                    <span>Note</span>
+                  </button>
+                  <button mat-menu-item (click)="switchTabs(3)">
+                    <mat-icon>task</mat-icon>
+                    <span>View CV</span>
+                  </button>
+                  <button mat-menu-item (click)="switchTabs(4)">
+                    <mat-icon>note</mat-icon>
+                    <span>Report</span>
+                  </button>
+
+                  <button
+                    mat-menu-item
+                    (click)="
+                      switchStatus(
+                        candidateDetail?._id,
+                        candidateDetail?.is_active
+                      )
+                    "
+                  >
+                    <mat-icon>swap_horiz</mat-icon>
+                    <span>Deactivate/Active</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    (click)="openDelete(candidateDetail._id)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="candidate-detail--main">
+          <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="start">
+            <mat-tab label="Jobs">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-suitcase" aria-hidden="true"></i
+                ><span> Evaluate</span>
+              </ng-template>
+              <app-candidate-evaluate
+                [details]="candidateDetail"
+              ></app-candidate-evaluate>
+            </mat-tab>
+            <mat-tab label="Jobs">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-user" aria-hidden="true"></i
+                ><span> Summary</span>
+              </ng-template>
+              <app-candidate-summary
+                [details]="candidateDetail"
+              ></app-candidate-summary>
+            </mat-tab>
+            <mat-tab label="Jobs">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-clipboard" aria-hidden="true"></i
+                ><span> CV</span>
+              </ng-template>
+              <app-cv [details]="candidateDetail"></app-cv>
+            </mat-tab>
+            <mat-tab label="Jobs">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-sticky-note" aria-hidden="true"></i
+                ><span> Note</span>
+              </ng-template>
+              <app-candidate-note
+                [details]="candidateDetail"
+              ></app-candidate-note>
+            </mat-tab>
+            <mat-tab label="Jobs">
+              <ng-template class="tab-label" mat-tab-label>
+                <i class="fa fa-bar-chart" aria-hidden="true"></i
+                ><span> Report</span>
+              </ng-template>
+              <app-candidate-report
+                [details]="candidateDetail"
+              ></app-candidate-report>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="container-fluid">
+  <div class="row pb-3">
+    <div class="col-md-6">
+      <h1>Contacts</h1>
+    </div>
+    <div class="col-md-6">
+      <button class="btn pt-2 add-btn" (click)="openAdd('')">
+        Add new contacts
+      </button>
+    </div>
+  </div>
+  <div *ngIf="contactList.length === 0" class="row">
+    <app-empty-data [action]="'contacts'"></app-empty-data>
+  </div>
+  <div *ngIf="contactList.length != 0" class="row">
+    <div class="table-wrapper">
+      <nav class="navbar">
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-1 w-100">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button
+                id="button-addon2"
+                type="submit"
+                class="btn btn-link text-warning"
+              >
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+            <input
+              type="search"
+              placeholder="What're you searching for?"
+              aria-describedby="button-addon2"
+              class="form-control border-0 bg-light"
+              [(ngModel)]="searchValue"
+            />
+          </div>
+        </div>
+      </nav>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th (click)="setSort('name')">
+                Name &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+              </th>
+              <th (click)="setSort('email')">
+                Email &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+              </th>
+              <th (click)="setSort('phone')">
+                Phone &nbsp; <i class="fa fa-sort" aria-hidden="true"></i>
+              </th>
+              <th (click)="setSort('location')">
+                Location &nbsp;
+                <i class="fa fa-sort" aria-hidden="true"></i>
+              </th>
+              <th (click)="setSort('website')">
+                Website &nbsp;
+                <i class="fa fa-sort" aria-hidden="true"></i>
+              </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let contact of contactList
+                  | filter: searchValue
+                  | orderBy: key:reverse
+                  | paginate: { itemsPerPage: itemsPerPage, currentPage: p }
+              "
+            >
+              <td class="name" [routerLink]="['/contacts', contact?._id]">
+                {{ contact?.name }}
+              </td>
+              <td>{{ contact?.email }}</td>
+              <td>{{ contact?.phone }}</td>
+              <td>{{ contact?.location }}</td>
+              <td>
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </td>
+              <td>
+                <div class="table-actions" ngbDropdown container="body">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm"
+                    ngbDropdownToggle
+                  >
+                    Actions
+                  </button>
+                  <div class="table-action" ngbDropdownMenu>
+                    <button
+                      ngbDropdownItem
+                      [routerLink]="['/contacts', contact?._id]"
+                    >
+                      Details
+                    </button>
+                    <button ngbDropdownItem (click)="openAdd(contact)">
+                      Update
+                    </button>
+                    <button ngbDropdownItem (click)="openContact(contact)">
+                      Contact
+                    </button>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem>Deactivate/Active</button>
+                    <button ngbDropdownItem (click)="openDelete(contact._id)">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-pagination">
+        <div class="row d-flex justify-content-between">
+          <div class="col-md-3">
+            <label
+              >Items per page:
+              <select [(ngModel)]="itemsPerPage">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </label>
+          </div>
+          <div class="col-md-4 p-3">
+            <pagination-controls
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
