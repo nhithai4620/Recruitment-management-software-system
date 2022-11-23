@@ -7,6 +7,7 @@ import { RequestsService } from '../../../core/services/requests.service';
 import { Router } from '@angular/router';
 import { CandidatesService } from 'src/app/core/services/candidates.service';
 import { ContactsService } from '../../../core/services/contacts.service';
+import { ActivitiesService } from '../../../core/services/activities.service';
 @Component({
   selector: 'app-delete-confirm-dialog',
   templateUrl: './delete-confirm-dialog.component.html',
@@ -21,6 +22,7 @@ export class DeleteConfirmDialogComponent implements OnInit {
     private requestsService: RequestsService,
     private candidateService: CandidatesService,
     private contactService: ContactsService,
+    private activitiesService: ActivitiesService,
     private router: Router
   ) {}
 
@@ -48,6 +50,8 @@ export class DeleteConfirmDialogComponent implements OnInit {
     } else if (this.data.action == 'contact') {
       this.contactService.deleteContact(this.data.id);
       this.router.navigate(['/contacts']);
+    } else if (this.data.action == 'activity') {
+      this.activitiesService.deleteActivity(this.data.id);
     } else if (this.data.action == 'Job Requisition Recruiter') {
       const user = {
         jobId: this.data.jobId,

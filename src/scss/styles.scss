@@ -25,7 +25,10 @@ $enable-rtl: true;
 // If you want to add something do it here
 @import "custom";
 
-@import "../../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../../node_modules/angular-calendar/scss/angular-calendar.scss";
+
+
+@import "../../node_modules/flatpickr/dist/flatpickr";
 
 .cdk-overlay-container {
     z-index: 1200 !important;

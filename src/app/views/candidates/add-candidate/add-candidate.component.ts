@@ -81,6 +81,8 @@ export class AddCandidateComponent implements OnInit {
 
     if (this.data) {
       this.action = 'Update';
+      console.log(this.data);
+      this.selectedItems = this.data?.jobTitle;
       this.candidateForm.patchValue({
         email: this.data?.email,
         phone: this.data?.contact?.phone,

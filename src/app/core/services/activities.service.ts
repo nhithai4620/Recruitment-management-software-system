@@ -61,7 +61,8 @@ export class ActivitiesService {
 
   addActivity(activity: any) {
     const data = JSON.stringify(activity);
-    this.spinner.show();
+
+    console.log(data);
     return this.http
       .post<any>(`${environment.apiUrl}/activities`, data, {
         headers: this.Headers,

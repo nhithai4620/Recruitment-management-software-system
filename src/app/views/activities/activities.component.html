@@ -94,11 +94,58 @@
 
 <br /><br /><br />
 
+<div class="row">
+  <h3>Actitivy type :</h3>
+  <div class="col-md-3">
+    <p class="colors">Calls:</p>
+    <input
+      type="color"
+      (change)="refresh.next()"
+      [(ngModel)]="colors['blue'].primary"
+      disabled="true"
+    />
+  </div>
+  <div class="col-md-3">
+    <p class="colors">Meeting :</p>
+    <input
+      type="color"
+      (change)="refresh.next()"
+      [(ngModel)]="colors['green'].primary"
+      disabled="true"
+    />
+  </div>
+  <div class="col-md-3">
+    <p class="colors">Task :</p>
+    <input
+      type="color"
+      (change)="refresh.next()"
+      [(ngModel)]="colors['red'].primary"
+      disabled="true"
+    />
+  </div>
+  <div class="col-md-3">
+    <p class="colors">Interview :</p>
+    <input
+      type="color"
+      (change)="refresh.next()"
+      [(ngModel)]="colors['yellow'].primary"
+      disabled="true"
+    />
+  </div>
+</div>
+
+<br /><br /><br />
+
 <h3>
   Edit events
-  <button class="btn btn-primary float-end" (click)="addEvent()">
+  <button class="btn btn-primary float-end" (click)="addEvent('')">
     Add new
   </button>
+
+  <button class="btn btn-primary float-end refresh-btn" (click)="reloadPage()">
+    Refresh
+  </button>
+
   <div class="clearfix"></div>
 </h3>
 
@@ -107,8 +154,7 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary + text color</th>
+        <th>Color</th>
         <th>Starts at</th>
         <th>Ends at</th>
         <th>Remove</th>
@@ -130,19 +176,7 @@
             type="color"
             [(ngModel)]="event.color!.primary"
             (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            type="color"
-            [(ngModel)]="event.color!.secondary"
-            (change)="refresh.next()"
-          />
-          <input
-            type="color"
-            [ngModel]="event.color!.secondaryText ?? '#1e90ff'"
-            (ngModelChange)="event.color!.secondaryText = $event"
-            (change)="refresh.next()"
+            disabled="true"
           />
         </td>
         <td>
@@ -176,6 +210,18 @@
           />
         </td>
         <td>
+          <button
+            class="btn btn-warning refresh-btn"
+            (click)="updateDate(event?.start, event?.end, event?.id)"
+          >
+            Save
+          </button>
+          <button
+            class="btn btn-success refresh-btn"
+            (click)="addEvent(event?.id)"
+          >
+            Update
+          </button>
           <button class="btn btn-danger" (click)="deleteEvent(event)">
             Delete
           </button>
@@ -195,11 +241,11 @@
   <div class="modal-body">
     <div>
       Action:
-      <pre>{{ modalData.action }}</pre>
+      <pre>{{ modalData!.action }}</pre>
     </div>
     <div>
       Event:
-      <pre>{{ modalData.event | json }}</pre>
+      <pre>{{ modalData!.event | json }}</pre>
     </div>
   </div>
   <div class="modal-footer">

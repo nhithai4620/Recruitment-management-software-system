@@ -2,7 +2,7 @@
   <div class="wrapper">
     <mat-card class="add-activity">
       <mat-card-header>
-        <mat-card-title>Create activity</mat-card-title>
+        <mat-card-title>{{ action }} activity</mat-card-title>
         <button
           type="button"
           class="btn-close"
@@ -270,6 +270,7 @@
                     (f['attendees'].touched || submitted)
                 }"
               >
+                <i class="fa fa-user" aria-hidden="true"></i>
                 Attendees
                 <span
                   [class]="{
@@ -281,25 +282,18 @@
                   * :
                 </span>
               </label>
-              <select
-                name="attendees"
-                id="attendees"
+              <ng-multiselect-dropdown
+                [placeholder]="'Select candidates assigned'"
+                [data]="candidateList"
+                [settings]="dropdownSettings"
                 formControlName="attendees"
-                class="form-control"
                 [class]="{
                   'is-invalid':
                     f['attendees'].errors &&
                     (f['attendees'].touched || submitted)
                 }"
               >
-                <option value="" disabled>Select attendees</option>
-                <option
-                  [value]="candidate._id"
-                  *ngFor="let candidate of candidateList"
-                >
-                  {{ candidate.email }}
-                </option>
-              </select>
+              </ng-multiselect-dropdown>
               <div
                 *ngIf="
                   f['attendees'].errors && (f['attendees'].touched || submitted)
@@ -383,7 +377,7 @@
             class="form-control btn btn-primary rounded submit form-button__save"
             (click)="onSubmit()"
           >
-            Send
+            {{ action }}
           </button>
           <button
             type="submit"

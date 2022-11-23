@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   AbstractControl,
@@ -20,6 +20,12 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./add-activities.component.scss'],
 })
 export class AddActivitiesComponent implements OnInit {
+  @Input() data: any;
+
+  activityDetail: any;
+
+  action: String = 'Add';
+
   submitted: boolean = false;
   activityForm: FormGroup = new FormGroup({});
   required: boolean = !1;
@@ -61,6 +67,7 @@ export class AddActivitiesComponent implements OnInit {
   recruiterList!: any[];
   candidateList!: any[];
   selectedItems = [];
+  selectedAttendees: any;
 
   simpleItems = ['Manual URL', 'Google meeting', 'Zoom'];
 
@@ -106,6 +113,29 @@ export class AddActivitiesComponent implements OnInit {
       itemsShowLimit: 4,
       allowSearchFilter: true,
     };
+
+    if (this.data) {
+      console.log(this.data);
+      this.action = 'Update';
+      this.activitiesService.getActivity(this.data);
+      this.activitiesService.activity$.subscribe((data: any) => {
+        this.activityDetail = data;
+
+        this.activityForm.patchValue({
+          title: this.activityDetail?.title,
+          type: this.activityDetail?.type,
+          timeStart: this.activityDetail?.timeStart,
+          timeEnd: this.activityDetail?.timeEnd,
+          location: this.activityDetail?.location,
+          assignees: this.activityDetail?.assignees,
+          attendees: this.activityDetail?.attendees,
+          meetingType: this.activityDetail?.meetingType,
+          link: this.activityDetail?.link,
+          tag: this.activityDetail?.tag,
+          description: this.activityDetail?.description,
+        });
+      });
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -124,8 +154,14 @@ export class AddActivitiesComponent implements OnInit {
 
     if (this.activityForm.invalid) {
       return;
-    } else {
+    } else if (!this.data) {
       this.activitiesService.addActivity(this.activityForm.value);
+      this.activeModal.close('Close click');
+    } else if (this.data) {
+      this.activitiesService.updateActivity(
+        this.activityForm.value,
+        this.activityDetail._id
+      );
       this.activeModal.close('Close click');
     }
   }

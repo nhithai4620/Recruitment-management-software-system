@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 import {
   startOfDay,
@@ -10,6 +10,7 @@ import {
   isSameMonth,
   addHours,
 } from 'date-fns';
+import { map } from 'rxjs/operators';
 
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +21,9 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
+import { ActivitiesService } from '../../core/services/activities.service';
+import { AddActivitiesComponent } from './add-activities/add-activities.component';
+import { DeleteConfirmDialogComponent } from 'src/app/shared/components/delete-confirm-dialog/delete-confirm-dialog.component';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -32,6 +36,10 @@ const colors: Record<string, EventColor> = {
   },
   yellow: {
     primary: '#e3bc08',
+    secondary: '#FDF1BA',
+  },
+  green: {
+    primary: '#008000',
     secondary: '#FDF1BA',
   },
 };
@@ -68,6 +76,27 @@ export class ActivitiesComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  activityList: any[] = [];
+
+  colors: Record<string, EventColor> = {
+    red: {
+      primary: '#ad2121',
+      secondary: '#FAE3E3',
+    },
+    blue: {
+      primary: '#1e90ff',
+      secondary: '#D1E8FF',
+    },
+    yellow: {
+      primary: '#e3bc08',
+      secondary: '#FDF1BA',
+    },
+    green: {
+      primary: '#008000',
+      secondary: '#FDF1BA',
+    },
+  };
+
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
@@ -89,51 +118,97 @@ export class ActivitiesComponent implements OnInit {
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+    // {
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: 'A 3 day event',
+    //   color: { ...colors['red'] },
+    //   actions: this.actions,
+    //   allDay: true,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    // },
+    // {
+    //   start: startOfDay(new Date()),
+    //   title: 'An event with no end date',
+    //   color: { ...colors['yellow'] },
+    //   actions: this.actions,
+    // },
+    // {
+    //   start: subDays(endOfMonth(new Date()), 3),
+    //   end: addDays(endOfMonth(new Date()), 3),
+    //   title: 'A long event that spans 2 months',
+    //   color: { ...colors['blue'] },
+    //   allDay: true,
+    // },
+    // {
+    //   start: addHours(startOfDay(new Date()), 2),
+    //   end: addHours(new Date(), 2),
+    //   title: 'A draggable and resizable event',
+    //   color: { ...colors['yellow'] },
+    //   actions: this.actions,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true,
+    //   },
+    //   draggable: true,
+    // },
   ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(
+    private modal: NgbModal,
+    private activitiesService: ActivitiesService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activitiesService.getActivities();
+
+    this.activitiesService.activities$.subscribe((data: any) => {
+      this.activityList = data;
+      this.events = [];
+      this.activityList.forEach((item) => {
+        this.events.push({
+          id: item?._id,
+          start: new Date(item?.timeStart),
+          end: new Date(item?.timeEnd),
+          title: item?.title,
+          color: this.checkType(item?.type),
+          actions: this.actions,
+          draggable: true,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true,
+          },
+        });
+      });
+      this.refresh.next();
+    });
+
+    console.log(this.events);
+  }
+
+  checkType(type: String): EventColor {
+    if (type === 'call') {
+      return { ...colors['blue'] };
+    } else if (type === 'meeting') {
+      return { ...colors['green'] };
+    } else if (type === 'task') {
+      return { ...colors['red'] };
+    } else {
+      return { ...colors['yellow'] };
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {}
+
+  reloadPage() {
+    // window.location.reload();
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -172,25 +247,37 @@ export class ActivitiesComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
+  addEvent(data: any): void {
+    const modalRef = this.modal.open(AddActivitiesComponent, {
+      centered: true,
+    });
+
+    modalRef.componentInstance.data = data;
+
+    // this.events = [
+    //   ...this.events,
+    //   {
+    //     title: 'New event',
+    //     start: startOfDay(new Date()),
+    //     end: endOfDay(new Date()),
+    //     color: colors['red'],
+    //     draggable: true,
+    //     resizable: {
+    //       beforeStart: true,
+    //       afterEnd: true,
+    //     },
+    //   },
+    // ];
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
+    // this.events = this.events.filter((event) => event !== eventToDelete);
+    const data = {
+      id: eventToDelete.id,
+      action: 'activity',
+    };
+    const modalRef = this.modal.open(DeleteConfirmDialogComponent);
+    modalRef.componentInstance.data = data;
   }
 
   setView(view: CalendarView) {
@@ -199,5 +286,15 @@ export class ActivitiesComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  updateDate(start: any, end: any, id: any) {
+    var data = {};
+    data = {
+      timeStart: start,
+      timeEnd: end,
+    };
+
+    this.activitiesService.updateActivity(data, id);
   }
 }
