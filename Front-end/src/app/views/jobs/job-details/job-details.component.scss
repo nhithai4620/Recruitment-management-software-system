@@ -1,0 +1,102 @@
+@import 'local/partials/label';
+
+.job-details--top {
+    padding: 10px;
+    background: linear-gradient(to right, #ffffff, #dce3e9f6, #ddeefb);
+}
+
+.disable {
+    @include label;
+    background-color: rgb(237, 95, 124);
+    font-weight: 500;
+}
+
+.active {
+    @include label;
+    background-color: rgb(108, 222, 108);
+    font-weight: 500;
+}
+
+.job-details--top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &-name {
+
+        h3,
+        p {
+            margin-bottom: 5px;
+            width: fit-content;
+            block-size: fit-content;
+        }
+    }
+
+    &-statistic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+
+
+        h5,
+        p {
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        h5 {
+            padding: 10px 0px;
+        }
+
+        >div {
+            border-radius: 5px;
+            width: 100%;
+            min-width: 80px;
+            flex: 1;
+            background-color: white;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+    }
+}
+
+.type {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.job-details--main {
+    .fa {
+        margin-right: 10px;
+    }
+
+    span {
+        font-size: 18px;
+        font-weight: 500px;
+    }
+}
+
+
+.hire {
+    h5 {
+        background-color: rgb(35, 251, 35);
+    }
+
+}
+
+.pipeline {
+    h5 {
+        background-color: rgb(36, 119, 243);
+    }
+
+}
+
+.dropped {
+    h5 {
+        background-color: rgb(243, 195, 106);
+    }
+
+}

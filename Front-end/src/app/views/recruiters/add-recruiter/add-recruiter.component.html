@@ -1,0 +1,372 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ action }} recuiter</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form
+    [formGroup]="recruiterForm"
+    (ngSubmit)="onSubmit()"
+    class="profile-form"
+  >
+    <div class="form-wrapper">
+      <div class="row d-flex justify-content-center">
+        <img src="assets/images/interviewers.png" class="w-25" alt="" />
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="email"
+              [class]="{
+                'star-invalid':
+                  f['email'].errors && (f['email'].touched || submitted)
+              }"
+            >
+              Email
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['email'].errors ||
+                    (f['email'].touched && f['email'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+              autocomplete="fsdfsd"
+              [readonly]="data"
+              [class]="{
+                'is-invalid':
+                  f['email'].errors && (f['email'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="f['email'].errors && (f['email'].touched || submitted)"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['email'].errors['required']">Email is required</div>
+              <div *ngIf="f['email'].errors['minlength']">
+                Email is required
+              </div>
+              <div *ngIf="f['email'].errors['email']">
+                Email format is invalid
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label class="label" for="phone">Phone</label>
+            <input
+              type="text"
+              id="phone"
+              class="form-control"
+              autocomplete="fsdfsd"
+              formControlName="phone"
+              [class]="{
+                'is-invalid':
+                  f['phone'].errors && (f['phone'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="f['phone'].errors && (f['phone'].touched || submitted)"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['phone'].errors['pattern']">
+                Phone number format is invalid
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="firstName"
+              [class]="{
+                'star-invalid': f['firstName'].errors && f['firstName'].touched
+              }"
+            >
+              First Name
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['firstName'].errors ||
+                    (f['firstName'].touched && f['firstName'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              class="form-control"
+              formControlName="firstName"
+              autocomplete="fsdfsd"
+              [class]="{
+                'is-invalid':
+                  f['firstName'].errors && (f['firstName'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="
+                f['firstName'].errors && (f['firstName'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['firstName'].errors['required']">
+                First name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="lastName"
+              [class]="{
+                'star-invalid': f['lastName'].errors && f['lastName'].touched
+              }"
+            >
+              Last Name
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['lastName'].errors ||
+                    (f['lastName'].touched && f['lastName'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              formControlName="lastName"
+              autocomplete="fsdfsd"
+              [class]="{
+                'is-invalid':
+                  f['lastName'].errors && (f['lastName'].touched || submitted)
+              }"
+            />
+            <div
+              *ngIf="
+                f['lastName'].errors && (f['lastName'].touched || submitted)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['lastName'].errors['required']">
+                Last name is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label class="label" for="dob">Day of birth</label>
+            <input
+              type="date"
+              id="dob"
+              class="form-control"
+              formControlName="dob"
+              autocomplete="fsdfsd"
+              [class]="{
+                'is-invalid': f['dob'].errors && (f['dob'].touched || submitted)
+              }"
+            />
+            <!-- <input
+              type="text"
+              placeholder="dd/mm/yyyy"
+              class="form-control"
+              formControlName="dob"
+              autocomplete="fsdfsd"
+              [bsConfig]="datePickerOptions"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+              bsDatepicker
+              #dp="bsDatepicker"
+              [(bsValue)]="myDateValue"
+              [class]="{
+                'is-invalid': f['dob'].errors && (f['dob'].touched || submitted)
+              }"
+            /> -->
+            <div
+              *ngIf="f['dob'].errors && (f['dob'].touched || submitted)"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f['dob'].errors['underage']">
+                Day of birth format is invalid, must be greater than 12 and less
+                than 100
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label class="label" for="jobTitle">Job title</label>
+            <ng-multiselect-dropdown
+              [placeholder]="'Select job assigned'"
+              [settings]="dropdownSettings"
+              [data]="jobList"
+              formControlName="jobTitle"
+              [(ngModel)]="selectedItems"
+            >
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="permission">Assign Permission</label>
+            <select
+              name="type"
+              id="permission"
+              formControlName="permission"
+              class="form-control"
+            >
+              <option value="" disabled>Assign permission</option>
+              <option
+                *ngFor="let permission of permissionList"
+                [value]="permission._id"
+              >
+                {{ permission.role }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="password"
+              [class]="{
+                'star-invalid':
+                  f['password'].errors && (f['password'].touched || submitted)
+              }"
+            >
+              Password
+              <span
+                [class]="{
+                  'star-invalid':
+                    f['password'].errors ||
+                    (f['password'].touched && f['password'].errors)
+                }"
+              >
+                *
+              </span>
+            </label>
+            <div class="input-group">
+              <input
+                [type]="'password'"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                autocomplete="fsdfsd"
+                [class]="{
+                  'is-invalid':
+                    f['password'].errors && (f['password'].touched || submitted)
+                }"
+              />
+              <div
+                *ngIf="
+                  f['password'].errors && (f['password'].touched || submitted)
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="f['password'].errors['required']">
+                  Password is required
+                </div>
+                <div *ngIf="f['password'].errors['minlength']">
+                  Password must be at least 6 characters
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label
+              class="label"
+              for="conpassword"
+              [class]="{
+                'star-invalid': f['conpassword'].errors && submitted
+              }"
+              >Confirm password
+              <span
+                [class]="{
+                  'star-invalid':
+                    (submitted && f['conpassword'].errors) ||
+                    f['conpassword'].errors
+                }"
+                >*
+              </span>
+            </label>
+
+            <div class="input-group">
+              <input
+                [type]="'password'"
+                id="conpassword"
+                class="form-control"
+                formControlName="conpassword"
+                autocomplete="fsdfsd"
+                [class]="{
+                  'is-invalid': f['conpassword'].errors && submitted
+                }"
+              />
+              <div
+                *ngIf="f['conpassword'].errors && submitted"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f['conpassword'].errors['required']">
+                  Confirm Password is required
+                </div>
+                <div *ngIf="f['conpassword'].errors['minlength']">
+                  Confirm Password must be at least 6 characters
+                </div>
+                <div *ngIf="f['conpassword'].errors['matching']">
+                  Password mismatch
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-button">
+        <button
+          type="submit"
+          class="form-control btn btn-primary rounded submit form-button__save"
+        >
+          Save
+        </button>
+        <button
+          type="submit"
+          class="form-control btn rounded submit form-button__cancel"
+          (click)="activeModal.close('Close click')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

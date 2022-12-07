@@ -1,0 +1,134 @@
+@import 'config/color';
+@import 'local/partials';
+@import 'local/partials/_status-btn';
+
+.add-btn {
+    @include button;
+    padding: 10px 30px;
+    float: right;
+}
+
+.btn-outline-primary {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.name {
+    cursor: pointer;
+    font-weight: 500;
+    color: $primary;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.container-fluid {
+    padding: 10px 0px;
+    padding-bottom: 30px;
+}
+
+.table-actions {
+    .btn {
+        color: $primary;
+        border-color: $primary;
+
+        &:hover {
+            background-color: $primary;
+            color: white;
+            font-weight: 600;
+        }
+    }
+
+    .table-action {
+        color: $primary;
+
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+        button {
+            padding: 10px 15px;
+        }
+    }
+}
+
+.fa {
+    color: $primary;
+    margin-right: 10px;
+}
+
+::ng-deep .mat-button-toggle-group {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+
+    padding: 0px;
+
+    .mat-button-toggle {
+        flex: 50%;
+    }
+
+    .mat-button-toggle-checked {
+        i {
+            color: white;
+        }
+
+        background-color: $primary;
+        color: white;
+        font-weight: 500;
+    }
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    >div {
+        flex: 40%;
+        height: 100px;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    max-width: 700px;
+
+    &--avatar {
+        display: block;
+        margin: 0 auto;
+        flex: 25%;
+
+        img {
+            margin-left: 20%;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+        }
+    }
+
+    &--details {
+        flex: 70%;
+
+        p {
+            margin: 5px 0px !important;
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+
+    &--actions {
+        flex: 5%;
+
+        button {
+            border: none;
+        }
+    }
+}

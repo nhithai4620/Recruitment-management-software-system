@@ -1,0 +1,105 @@
+@import 'local/partials/avatar';
+@import 'local/partials/label';
+@import 'local/partials/_status-btn';
+
+
+.candidate-detail--top {
+    padding: 10px;
+    background: linear-gradient(to right, #ffffff, #dce3e9f6, #ddeefb);
+}
+
+.label {
+    @include label;
+
+    &__role {
+        background-color: rgba(207, 207, 207, 0.708);
+    }
+
+    &__active {
+        background-color: rgb(157, 224, 157);
+    }
+
+    &__email {
+        background-color: rgb(227, 197, 140);
+    }
+}
+
+.candidate-detail {
+    &--top {
+        margin-bottom: 20px;
+
+        &-name {
+            margin: 10px 30px;
+
+            h3,
+            p {
+                margin-bottom: 5px;
+                width: fit-content;
+                block-size: fit-content;
+            }
+
+            h3 {
+                margin-bottom: 10px;
+            }
+        }
+
+        &-option {
+            float: right;
+
+            i {
+                font-size: 23px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &--main {
+        .fa {
+            margin-right: 10px;
+        }
+
+        span {
+            font-size: 18px;
+            font-weight: 500px;
+        }
+
+    }
+}
+
+
+
+
+.avatar-profile {
+    @include avatar;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+
+    .hoverable {
+        width: 150px;
+        height: 150px;
+    }
+
+    .fa-camera-retro {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: white;
+    }
+}
+
+.disable {
+    @include label;
+    background-color: rgb(237, 95, 124);
+}
+
+.active {
+    @include label;
+    background-color: rgb(108, 222, 108);
+}
+
+ngb-rating {
+    font-size: 22px;
+    color: rgb(215, 205, 12);
+}

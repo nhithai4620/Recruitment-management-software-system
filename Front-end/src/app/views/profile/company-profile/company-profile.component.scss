@@ -1,0 +1,21 @@
+@import 'local/partials/avatar';
+@import 'local/partials/form';
+
+
+.avatar-profile {
+    @include avatar;
+
+    .hoverable {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+.form-wrap {
+    background-color: white;
+}
+
+input,
+select {
+    background-color: rgba(215, 215, 215, 0.479);
+}
