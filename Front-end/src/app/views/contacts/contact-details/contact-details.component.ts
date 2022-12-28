@@ -1,32 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
-} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ContactsService } from 'src/app/core/services/contacts.service';
-import emailTemplate from 'src/app/shared/template/standard-reply-job-seeker-template';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { UploadService } from 'src/app/core/services/upload.service';
-import { SendMailService } from 'src/app/core/services/send-mail.service';
-import { AddContactComponent } from '../add-contact/add-contact.component';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+} from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { ContactsService } from "src/app/core/services/contacts.service";
+import emailTemplate from "src/app/shared/template/standard-reply-job-seeker-template";
+import { AngularEditorConfig } from "@kolkov/angular-editor";
+import { ToastrService } from "ngx-toastr";
+import { NgxSpinnerService } from "ngx-spinner";
+import { UploadService } from "src/app/core/services/upload.service";
+import { SendMailService } from "src/app/core/services/send-mail.service";
+import { AddContactComponent } from "../add-contact/add-contact.component";
+import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-contact-details',
-  templateUrl: './contact-details.component.html',
-  styleUrls: ['./contact-details.component.scss'],
+  selector: "app-contact-details",
+  templateUrl: "./contact-details.component.html",
+  styleUrls: ["./contact-details.component.scss"],
 })
 export class ContactDetailsComponent implements OnInit {
   contactDetail: any;
 
   id: any;
 
-  people: string = 'Hiring manager';
+  people: string = "Hiring manager";
 
   validateFileSize: boolean = false;
 
@@ -34,25 +34,25 @@ export class ContactDetailsComponent implements OnInit {
 
   contactForm: FormGroup = new FormGroup({});
 
-  htmlContent = '';
+  htmlContent = "";
 
   emailTemplates = emailTemplate;
 
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    placeholder: 'Enter text here...',
-    translate: 'no',
-    defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial',
-    toolbarHiddenButtons: [['bold']],
+    height: "15rem",
+    minHeight: "5rem",
+    placeholder: "Enter text here...",
+    translate: "no",
+    defaultParagraphSeparator: "p",
+    defaultFontName: "Arial",
+    toolbarHiddenButtons: [["bold"]],
     fonts: [
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+      { class: "arial", name: "Arial" },
+      { class: "times-new-roman", name: "Times New Roman" },
+      { class: "calibri", name: "Calibri" },
+      { class: "comic-sans-ms", name: "Comic Sans MS" },
     ],
     enableToolbar: true,
     showToolbar: true,
@@ -70,7 +70,7 @@ export class ContactDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get("id");
 
     this.contactService.getContact(this.id);
     this.contactService.contact$.subscribe((data: any) => {
@@ -81,21 +81,21 @@ export class ContactDetailsComponent implements OnInit {
     });
 
     this.contactForm = this.fb.group({
-      templates: [''],
+      templates: [""],
       from: [
-        '',
+        "administrator@gmail.com",
         [Validators.required, Validators.minLength(8), Validators.email],
       ],
       to: [
-        '',
+        "",
         [Validators.required, Validators.minLength(8), Validators.email],
       ],
-      title: ['', [Validators.required]],
-      content: ['', [Validators.required]],
-      document: [''],
+      title: ["", [Validators.required]],
+      content: ["", [Validators.required]],
+      document: [""],
     });
 
-    this.contactForm.get('templates')?.valueChanges.subscribe((x) => {
+    this.contactForm.get("templates")?.valueChanges.subscribe((x) => {
       this.htmlContent = x;
     });
   }
@@ -122,7 +122,7 @@ export class ContactDetailsComponent implements OnInit {
     if (input.files && input.files[0]) {
       if (input.files[0].size > 5242880) {
         this.validateFileSize = true;
-        this.toastr.warning('Image size must be smaller than 5mb');
+        this.toastr.warning("Image size must be smaller than 5mb");
         this.spinner.hide();
       } else {
         this.uploadService.upLoadNonMediaFile(input).subscribe(
@@ -130,12 +130,12 @@ export class ContactDetailsComponent implements OnInit {
             this.contactForm.patchValue({
               document: data.data.url,
             });
-            this.toastr.success('Upload image success!');
+            this.toastr.success("Upload image success!");
             this.spinner.hide();
           },
           (err) => {
             console.log(err);
-            this.toastr.error('Upload image failed!');
+            this.toastr.error("Upload image failed!");
             this.spinner.hide();
           }
         );

@@ -7,6 +7,12 @@ router.post("", verifyToken, jobRequisitionController.addJobRequisition);
 
 router.get("", verifyToken, jobRequisitionController.listRequisition);
 
+router.get(
+  "/candidates/:id",
+  verifyToken,
+  jobRequisitionController.getCandidate
+);
+
 router.get("/:id", verifyToken, jobRequisitionController.getOneRequisition);
 
 router.put("/:id", verifyToken, jobRequisitionController.updateJobRequisition);

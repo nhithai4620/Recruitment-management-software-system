@@ -191,9 +191,9 @@
             <tr
               *ngFor="
                 let candidate of candidateList
-                  | filter: searchValue
-                  | orderBy: key:reverse
-                  | paginate: { itemsPerPage: itemsPerPage, currentPage: p }
+                  | filter : searchValue
+                  | orderBy : key : reverse
+                  | paginate : { itemsPerPage: itemsPerPage, currentPage: p }
               "
             >
               <td class="name" [routerLink]="['/candidates', candidate?._id]">
@@ -242,11 +242,18 @@
                     <button ngbDropdownItem (click)="openNote(candidate)">
                       Note
                     </button>
-                    <button ngbDropdownItem>Evaluate</button>
+                    <button
+                      ngbDropdownItem
+                      [routerLink]="['/candidates', candidate?._id]"
+                    >
+                      Evaluate
+                    </button>
                     <button ngbDropdownItem (click)="openContact(candidate)">
                       Contact
                     </button>
-                    <button ngbDropdownItem>Assign jobs</button>
+                    <button ngbDropdownItem (click)="openAdd(candidate)">
+                      Assign jobs
+                    </button>
                     <div class="dropdown-divider"></div>
                     <button
                       ngbDropdownItem

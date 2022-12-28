@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
+    <h3>{{ viewDate | calendarDate : view + "ViewTitle" : "en" }}</h3>
   </div>
   <div class="col-md-4">
     <div class="btn-group">
@@ -233,22 +233,62 @@
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
+    <h5 class="modal-title">Activities</h5>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <div>
-      Action:
-      <pre>{{ modalData!.action }}</pre>
+    <div class="row">
+      <div class="col-md-12">
+        <h5>{{ dateDetail?.title }}</h5>
+        <p>
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+          {{ dateDetail?.timeStart | date : "dd/MM/yyyy hh:mm a" }} to
+          {{ dateDetail?.timeEnd | date : "dd/MM/yyyy hh:mm a" }}
+        </p>
+      </div>
     </div>
-    <div>
-      Event:
-      <pre>{{ modalData!.event | json }}</pre>
+    <div class="row mt-1">
+      <div class="col-md-2">
+        <img src="assets/icons/google-meet.png" alt="" />
+      </div>
+      <div class="col-md-10 mt-1">
+        <a [href]="dateDetail?.link"
+          ><button class="btn btn-primary">Join with Google Meet</button></a
+        >
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <b> Type: </b>
+        <span class="type">{{ dateDetail?.type | uppercase }}</span>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <b> Assignees:</b>
+        <span class="assignees" *ngFor="let assign of dateDetail?.assignees">
+          {{ assign.email }}</span
+        >
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <b> Candidates:</b>
+        <span class="candidate" *ngFor="let candidate of dateDetail?.attendees">
+          {{ candidate.email }}</span
+        >
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12"><b> Location:</b> {{ dateDetail.location }}</div>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer btn-group">
+    <button class="btn btn-primary" (click)="addEvent(dateDetail?._id)">
+      Update
+    </button>
     <button type="button" class="btn btn-outline-secondary" (click)="close()">
       OK
     </button>

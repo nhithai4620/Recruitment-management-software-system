@@ -1,16 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from "ngx-toastr";
+import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class JobRequisitionService {
   Headers = new HttpHeaders({
-    'Content-Type': 'application/json; charset=utf-8',
+    "Content-Type": "application/json; charset=utf-8",
   });
 
   _requisition$ = new BehaviorSubject<any[]>([]);
@@ -24,6 +24,9 @@ export class JobRequisitionService {
 
   _job$ = new BehaviorSubject<any>({});
   job$ = this._job$.asObservable();
+
+  _candidates$ = new BehaviorSubject<any>({});
+  candidates$ = this._candidates$.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -39,10 +42,30 @@ export class JobRequisitionService {
         this.spinner.hide();
       },
       error: (error) => {
-        console.error('There was an error!', error);
+        console.error("There was an error!", error);
         this.spinner.hide();
       },
     });
+  }
+
+  getCandidates(id: string) {
+    this.spinner.show();
+    return this.http
+      .get<any>(`${environment.apiUrl}/requisitions/candidates/${id}`, {
+        headers: this.Headers,
+      })
+      .pipe()
+      .subscribe({
+        next: (res: any) => {
+          this.getRecruiters();
+          this.spinner.hide();
+          this._candidates$.next(res);
+        },
+        error: (error) => {
+          console.error("There was an error!", error);
+          this.spinner.hide();
+        },
+      });
   }
 
   getRequistionDetail(id: string) {
@@ -59,7 +82,7 @@ export class JobRequisitionService {
           this._job$.next(res);
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });
@@ -75,7 +98,7 @@ export class JobRequisitionService {
           this.spinner.hide();
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });
@@ -94,10 +117,10 @@ export class JobRequisitionService {
         next: (res: any) => {
           this.getRequisition();
           this.spinner.hide();
-          this.toastr.success('Add new job requisition successfully!');
+          this.toastr.success("Add new job requisition successfully!");
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });
@@ -121,10 +144,10 @@ export class JobRequisitionService {
           this.getRequisition();
           this.getRequistionDetail(id);
           this.spinner.hide();
-          this.toastr.success('Update status successfully!');
+          this.toastr.success("Update status successfully!");
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });
@@ -144,10 +167,10 @@ export class JobRequisitionService {
           this.getRequistionDetail(id);
           this.getRequisition();
           this.spinner.hide();
-          this.toastr.success('Update status successfully!');
+          this.toastr.success("Update status successfully!");
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });
@@ -162,10 +185,10 @@ export class JobRequisitionService {
         next: (res: any) => {
           this.getRequisition();
           this.spinner.hide();
-          this.toastr.success('Delete job requistion successfully!');
+          this.toastr.success("Delete job requistion successfully!");
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });
@@ -182,7 +205,7 @@ export class JobRequisitionService {
           this.spinner.hide();
         },
         error: (error) => {
-          console.error('There was an error!', error);
+          console.error("There was an error!", error);
           this.spinner.hide();
         },
       });

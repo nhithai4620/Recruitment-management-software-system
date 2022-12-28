@@ -1,8 +1,35 @@
 const bcrypt = require("bcryptjs");
 const { JobRequisition } = require("../../models/jobRequisition");
+const { Candidates } = require("../../models/candidates");
 const { Note } = require("../../models/note");
+var ObjectID = require("mongodb").ObjectID;
 
 const jobRequisitionController = {
+  getCandidate: async (req, res) => {
+    try {
+      const requisitionId = req.params;
+      var list = new Array();
+      Candidates.find({}, (err, candidates) => {
+        if (err) {
+          res.status(500).json(err);
+        }
+        candidates.map((user) => {
+          if (user.jobTitle) {
+            user.jobTitle.forEach((data) => {
+              const id = new ObjectID(requisitionId);
+              if (id.equals(data._id)) {
+                list.push(user);
+              }
+            });
+          }
+        });
+        res.status(200).json(list);
+      }).populate("jobTitle");
+    } catch (error) {
+      res.status(500).json(err);
+    }
+  },
+
   getOneRequisition: async (req, res) => {
     try {
       const requisitionId = req.params;

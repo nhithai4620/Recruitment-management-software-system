@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { UploadService } from 'src/app/core/services/upload.service';
+import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import { UploadService } from "src/app/core/services/upload.service";
 
 @Component({
-  selector: 'app-cv',
-  templateUrl: './cv.component.html',
-  styleUrls: ['./cv.component.scss'],
+  selector: "app-cv",
+  templateUrl: "./cv.component.html",
+  styleUrls: ["./cv.component.scss"],
 })
 export class CvComponent implements OnInit {
   @Input() details: any;
@@ -12,7 +12,7 @@ export class CvComponent implements OnInit {
   afuConfig: any;
 
   _base64ToArrayBuffer(base64: any): Uint8Array {
-    var binary_string = base64.replace(/\\n/g, '');
+    var binary_string = base64.replace(/\\n/g, "");
     binary_string = window.atob(base64);
     var len = binary_string.length;
     var bytes = new Uint8Array(len);
@@ -33,7 +33,7 @@ export class CvComponent implements OnInit {
     if (this.details?._id) {
       this.afuConfig = {
         uploadAPI: {
-          url: 'http://localhost:3000/api/v1/uploadFile/upload-file',
+          url: "http://localhost:3000/api/v1/uploadFile/upload-file",
           params: {
             id: this.details?._id,
           },

@@ -6,7 +6,6 @@ const candidatesSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   avatar: {
     type: String,
@@ -56,7 +55,7 @@ const candidatesSchema = new Schema({
   process: {
     type: String,
     required: false,
-    default: "prepared",
+    default: "inpipeline",
   },
   note: {
     type: mongoose.Schema.Types.ObjectId,

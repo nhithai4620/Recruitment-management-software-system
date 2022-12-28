@@ -48,6 +48,21 @@ const jobRequisitionSchema = new Schema({
     ref: "Note",
     required: false,
   },
+  hired: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  inPipeline: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  dropped: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   is_active: {
     type: Boolean,
     required: true,

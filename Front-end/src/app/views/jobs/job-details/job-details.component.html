@@ -16,15 +16,15 @@
           <div class="job-details--top-statistic pt-lg-1">
             <div class="statistic hire">
               <h5>Hired</h5>
-              <p>0</p>
+              <p>{{ todo.length }}</p>
             </div>
             <div class="statistic pipeline">
               <h5>In pipeline</h5>
-              <p>2</p>
+              <p>{{ done.length }}</p>
             </div>
             <div class="statistic dropped">
               <h5>Dropped</h5>
-              <p>1</p>
+              <p>{{ review.length }}</p>
             </div>
           </div>
           <div class="job-details--top-option">
@@ -86,8 +86,14 @@
                 <i class="fa fa-users" aria-hidden="true"></i
                 ><span> Candidates</span>
               </ng-template>
-
-              <app-empty-data [action]="'candidates'"></app-empty-data>
+              <!-- <div *ngIf="candidateList.length === 0" class="container-fluid">
+                <app-empty-data [action]="'candidates'"></app-empty-data>
+              </div> -->
+              <div class="container-fluid">
+                <app-job-candidates
+                  [candidates]="candidateList"
+                ></app-job-candidates>
+              </div>
             </mat-tab>
             <mat-tab label="Summary">
               <ng-template class="tab-label" mat-tab-label>

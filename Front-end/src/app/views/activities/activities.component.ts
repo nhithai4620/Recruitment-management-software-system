@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
+import { ChangeDetectionStrategy, ViewChild, TemplateRef } from "@angular/core";
 import {
   startOfDay,
   endOfDay,
@@ -9,46 +9,46 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
-} from 'date-fns';
-import { map } from 'rxjs/operators';
+} from "date-fns";
+import { map } from "rxjs/operators";
 
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
-} from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
-import { ActivitiesService } from '../../core/services/activities.service';
-import { AddActivitiesComponent } from './add-activities/add-activities.component';
-import { DeleteConfirmDialogComponent } from 'src/app/shared/components/delete-confirm-dialog/delete-confirm-dialog.component';
+} from "angular-calendar";
+import { EventColor } from "calendar-utils";
+import { ActivitiesService } from "../../core/services/activities.service";
+import { AddActivitiesComponent } from "./add-activities/add-activities.component";
+import { DeleteConfirmDialogComponent } from "src/app/shared/components/delete-confirm-dialog/delete-confirm-dialog.component";
 
 const colors: Record<string, EventColor> = {
   red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
+    primary: "#ad2121",
+    secondary: "#FAE3E3",
   },
   blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
+    primary: "#1e90ff",
+    secondary: "#D1E8FF",
   },
   yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
+    primary: "#e3bc08",
+    secondary: "#FDF1BA",
   },
   green: {
-    primary: '#008000',
-    secondary: '#FDF1BA',
+    primary: "#008000",
+    secondary: "#FDF1BA",
   },
 };
 
 @Component({
-  selector: 'app-activities',
+  selector: "app-activities",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss'],
+  templateUrl: "./activities.component.html",
+  styleUrls: ["./activities.component.scss"],
   styles: [
     `
       h3 {
@@ -63,13 +63,15 @@ const colors: Record<string, EventColor> = {
   ],
 })
 export class ActivitiesComponent implements OnInit {
-  @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
+  @ViewChild("modalContent", { static: true }) modalContent!: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+
+  dateDetail: any;
 
   modalData!: {
     action: string;
@@ -80,37 +82,37 @@ export class ActivitiesComponent implements OnInit {
 
   colors: Record<string, EventColor> = {
     red: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3',
+      primary: "#ad2121",
+      secondary: "#FAE3E3",
     },
     blue: {
-      primary: '#1e90ff',
-      secondary: '#D1E8FF',
+      primary: "#1e90ff",
+      secondary: "#D1E8FF",
     },
     yellow: {
-      primary: '#e3bc08',
-      secondary: '#FDF1BA',
+      primary: "#e3bc08",
+      secondary: "#FDF1BA",
     },
     green: {
-      primary: '#008000',
-      secondary: '#FDF1BA',
+      primary: "#008000",
+      secondary: "#FDF1BA",
     },
   };
 
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
+      a11yLabel: "Edit",
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.handleEvent("Edited", event);
       },
     },
     {
       label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
+      a11yLabel: "Delete",
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.handleEvent("Deleted", event);
       },
     },
   ];
@@ -193,14 +195,14 @@ export class ActivitiesComponent implements OnInit {
   }
 
   checkType(type: String): EventColor {
-    if (type === 'call') {
-      return { ...colors['blue'] };
-    } else if (type === 'meeting') {
-      return { ...colors['green'] };
-    } else if (type === 'task') {
-      return { ...colors['red'] };
+    if (type === "call") {
+      return { ...colors["blue"] };
+    } else if (type === "meeting") {
+      return { ...colors["green"] };
+    } else if (type === "task") {
+      return { ...colors["red"] };
     } else {
-      return { ...colors['yellow'] };
+      return { ...colors["yellow"] };
     }
   }
 
@@ -239,12 +241,16 @@ export class ActivitiesComponent implements OnInit {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
+    this.handleEvent("Dropped or resized", event);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    this.activitiesService.getActivity(event.id as string);
+    this.activitiesService.activity$.subscribe((data: any) => {
+      this.dateDetail = data;
+    });
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.modal.open(this.modalContent);
   }
 
   addEvent(data: any): void {
@@ -274,7 +280,7 @@ export class ActivitiesComponent implements OnInit {
     // this.events = this.events.filter((event) => event !== eventToDelete);
     const data = {
       id: eventToDelete.id,
-      action: 'activity',
+      action: "activity",
     };
     const modalRef = this.modal.open(DeleteConfirmDialogComponent);
     modalRef.componentInstance.data = data;

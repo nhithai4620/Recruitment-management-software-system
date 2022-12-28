@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ConvertTimePipe } from './pipes/convert-time.pipe';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ConvertTimePipe } from "./pipes/convert-time.pipe";
 
 @NgModule({
   declarations: [ConvertTimePipe],
